@@ -9,18 +9,62 @@
       <div class="from_data">
         <p>请录入已到店支付预款2000元的客户，与客户核实后录入，避免录入错误。</p>
         <ul>
-          <li>请选择</li>
+          <li class="selectCity">
+            <span>{{ textVal }}</span>
+            <div class="pullDown" @click="getCity"></div>
+          </li>
+          <li v-for="(item, index) in text" :key='index'>
+            <input-comp 
+              v-model="list[index]" 
+              :placeholderText='item.name'
+              :maxLength='item.maxLength'
+              :myType='item.type'/>
+          </li>
         </ul>
-        <button class="btn"></button>
+        <button class="btn" @click="submitData"></button>
       </div>
     </div>
     <div class="footer"></div>
+    <div class="showTips">
+      <tips :tipsText='tipsText'/>
+    </div>
   </div>
 </template>
 
 <script>
+import sha1 from '../utils/sha1'
+import axios from 'axios' 
+import Common from '../utils/common'
+
+import InputComp from '../components/inputComp';
+import Tips from '../components/tips';
+// import index from '../store';
+import {IndexModel} from '../utils/index'
+const indexModel = new IndexModel()
 export default {
+  components: { InputComp, Tips },
+  data() {
+    return {
+      text: [
+        {name: '请输入门店名称', type: 'text', maxLength:'5'},
+        {name: '请输入经销商姓名', type: 'text', maxLength:'5'},
+        {name: '请输入客户姓名', type: 'text', maxLength:'5'},
+        {name: '请输入客户手机', type: 'number', maxLength:'11'}
+      ],
+      list:[],
+      textVal:'请选择城市',
+      tipsText: '录入成功'
+    }
+  },
+  methods: {
+    submitData() {
+      console.log(23,this.list[4])
+    },
+    getCity() {
+      console.log(111)
+    }
   
+  }
 }
 </script>
 
@@ -62,15 +106,31 @@ export default {
       z-index: 99;
       position: relative;
       padding: 4.26vw 5.3vw;
-      // width:680px;
       height:90vw;
       background:rgba(17,63,111,0.5);
       border-radius:3.2vw;
       p {
         font-size: 3.73vw;
-        // color: #fff;
         color:rgba(142,221,255,1);
         line-height: 6.4vw;
+      }
+      .selectCity {
+        display: flex;
+        align-items: center;
+        font-size:4.26vw;
+        line-height: 13.3vw;
+        border-bottom: 1px solid #19589a;
+        width: 100%;
+        background:none;  
+        outline:none;  
+        color:  #68b9fe;
+        justify-content: space-between
+      }
+      .pullDown {
+        background: url(../assets/images/pulldown.png) no-repeat center;
+        background-size: 100% 100%;
+        width: 2.8vw;
+        height: 2.8vw;
       }
       .btn {
         background: url(../assets/images/btn.png) no-repeat center;
@@ -92,6 +152,15 @@ export default {
     position: fixed;
     bottom: 0;
     left: 0;
+  }
+  .showTips {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
   }
 }
 </style>
