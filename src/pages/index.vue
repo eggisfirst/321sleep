@@ -9,7 +9,7 @@
       <div class="from_data">
         <p>请录入已到店支付预款2000元的客户，与客户核实后录入，避免录入错误。</p>
         <ul>
-          <li>请选择城市</li>
+          <li>请选择</li>
         </ul>
         <button class="btn"></button>
       </div>
