@@ -15,35 +15,109 @@
       </div>
     </div>
     <div class="content">
-      <p>已有<strong>366</strong>人参与拼团</p>
+      <p>
+        <span v-if="isEnd">已</span>
+        <span v-else>共</span>有 <strong>366</strong>
+        人参与拼团
+      </p>
       <div class="countTime">
         <span>一</span>
-        <p>还剩
-        <span class="time day">10</span>天
-        <span class="time hour">10</span>时
-        <span class="time minute">10</span>分
-        <span class="time seconds">10</span>秒
+        <p v-if="isEnd">还剩
+          <span class="time day">{{ day }}</span>天
+          <span class="time hour">{{ hour }}</span>时
+          <span class="time minute">{{ minute }}</span>分
+          <span class="time seconds">{{ seconds }}</span>秒
         </p>
+        <p v-else>活动已结束</p>
         <span>一</span>
       </div>
       <div class="free">满1000人成团，并有一名客户<strong>免单</strong></div>
       <div class="rules">详情查看
-        <span class="rules_details">活动规则>></span>
+        <span class="rules_details" @click="showBtn">活动规则>></span>
       </div>
     </div>
     <div class="free_customer">
       <h1>免单客户</h1>
       <div class="free_bg"></div>
-      <div class="free_man"></div>
-      <p>4月1日抽出一人免单</p>
+      <div v-if="freeStatus">
+        <div class="free_man"></div>
+        <p>4月1日抽出一人免单</p>
+      </div>
+      <div class="free_person" v-else>
+        <h5>刘**</h5>
+        <h5>159**666666</h5>
+      </div>
     </div>
     <div class="footer"></div>
+    <div class="showrules" v-show="showStatus">
+      <show-rules :changVal='changVal'/>
+    </div>
   </div>
 </template>
 
 <script>
+import ShowRules from '../components/showRules';
+import {time} from '../utils/countTime'
 export default {
-  
+  components: { ShowRules },
+  data() {
+    return {
+      showStatus: '',
+      freeStatus: true,
+      isEnd: true,
+      day: '',
+      hour: '',
+      minute: '',
+      seconds: ''
+    }
+  },
+  watch: {
+    minute() {
+      this.getFreeMan()
+    }
+  },
+  mounted() {
+    this.time()
+  },
+  methods: {
+    //倒计时
+    time() {
+      let endTime = new Date('2019/03/24 23:59:59').getTime() + 1000;
+      let interval = null;
+      interval = setInterval(() => {
+        let remainingTime = endTime - Date.now(); // 剩余毫秒
+        if (remainingTime >= 0) {
+          this.day = Math.floor(remainingTime / 1000 / 60 / 60 / 24);
+          this.hour = Math.floor(remainingTime / 1000 / 60 / 60 % 24);
+          this.minute = Math.floor(remainingTime / 1000 / 60 % 60);
+          this.seconds = Math.floor(remainingTime / 1000 % 60);
+        } else {
+          clearInterval(interval);
+          this.isEnd = false
+        }
+      }, 0);
+    },
+    //4/1抽奖
+    getFreeMan() {
+      let year = new Date().getFullYear()
+      let day = new Date().getDate()
+      let mouth = new Date().getMonth() + 1
+      // let minute = new Date().getMinutes()
+      if(year == 2019 && mouth == 4 && day == 1) {
+        this.freeStatus = false
+      }else {
+        return 
+      }
+    },
+    //展示活动规则
+    showBtn() {
+      this.showStatus = true
+    },
+    //关闭规则
+    changVal(val) {
+      this.showStatus = val
+    }
+  }
 }
 </script>
 
@@ -116,6 +190,7 @@ export default {
     }
   }
   .content {
+    z-index: 1000;
     padding-top: 4.53vw;
     padding-bottom: 3.73vw;
     color: #fff;
@@ -145,7 +220,7 @@ export default {
       }
       .time {
         background:#a2e8fc;
-        padding: 1vw;
+        padding: 1vw 1.6vw;
         border-radius: .53vw;
         font-size: 4.26vw;
         color:#06192c;
@@ -166,6 +241,7 @@ export default {
     }
   }
   .free_customer {
+    position: relative;
     margin-top: 4.06vw;
     height: 50vw;
     width: 100%;
@@ -196,8 +272,13 @@ export default {
       height: 11.73vw;
       margin: 2vw auto;
     }
+    h5 {
+      color: #f8f8f8;
+      font-size: 4.8vw;
+      text-align: center;
+    }
     p {
-      color: rgba(248, 248, 248, 0.8);
+      color: rgba(248, 248, 248, 0.3);
       text-align: center;
     }
   }
@@ -209,6 +290,16 @@ export default {
     position: absolute;
     bottom: 0;
     left: 0;
+    pointer-events:none;
+  }
+  .showrules {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
   }
 }
 </style>
