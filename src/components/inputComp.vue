@@ -6,7 +6,7 @@
       :value="value"
       :maxlength="maxLength"
       v-on:input="$emit('input', $event.target.value)"
-      oninput="if(value.length>11)value=value.slice(0,11)">
+      >
   </div>
 </template>
 

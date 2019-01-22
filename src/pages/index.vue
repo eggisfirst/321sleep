@@ -7,7 +7,7 @@
         <img src="../assets/images/line.png" alt="">
       </div>
       <div class="from_data">
-        <p>请录入已到店支付预款2000元的客户，与客户核实后录入，避免录入错误。</p>
+        <p>{{ Title }}</p>
         <ul>
           <li class="selectCity">
             <span>{{ textVal }}</span>
@@ -20,13 +20,16 @@
               :maxLength='item.maxLength'
               :myType='item.type'/>
           </li>
+          <li class="raidoCom">
+            <radio-comp v-model='radioVal'/>
+          </li>
         </ul>
         <button class="btn" @click="submitData"></button>
       </div>
     </div>
     <div class="footer"></div>
-    <div class="showTips">
-      <tips :tipsText='tipsText'/>
+    <div class="showTips" v-show="isShowTips">
+      <tips :tipsText='tipsText' :tipsPic='tipsPic'/>
     </div>
   </div>
 </template>
@@ -35,34 +38,117 @@
 import sha1 from '../utils/sha1'
 import axios from 'axios' 
 import Common from '../utils/common'
+import {testPhone} from '../utils/common'
+import {isNull} from '../utils/common'
 
 import InputComp from '../components/inputComp';
+import RadioComp from '../components/radioComp';
 import Tips from '../components/tips';
 // import index from '../store';
 import {IndexModel} from '../utils/index'
 const indexModel = new IndexModel()
 export default {
-  components: { InputComp, Tips },
+  components: { InputComp, Tips, RadioComp },
   data() {
     return {
       text: [
-        {name: '请输入门店名称', type: 'text', maxLength:'5'},
-        {name: '请输入经销商姓名', type: 'text', maxLength:'5'},
-        {name: '请输入客户姓名', type: 'text', maxLength:'5'},
+        {name: '请输入门店名称', type: 'text', maxLength:'20'},
+        {name: '请输入经销商姓名', type: 'text', maxLength:'20'},
+        {name: '请输入客户姓名', type: 'text', maxLength:'20'},
         {name: '请输入客户手机', type: 'number', maxLength:'11'}
       ],
+      Title:'',
+      title: [
+        '请录入已到店支付预款2000元的客户，与客户核实后录入，避免录入错误。',
+        '请录入参与抽奖和秒杀活动的客户信息。',
+        '请录入参与秒杀活动的客户信息。'
+      ],
       list:[],
+      radioVal:'',
       textVal:'请选择城市',
-      tipsText: '录入成功'
+      tipsText: '录入成功',
+      isShowTips: false,
+      tipsPic: true
+    }
+  },
+  watch: {
+    radioVal() {
+      this.getTitle(this.radioVal)
     }
   },
   methods: {
     submitData() {
-      console.log(23,this.list[4])
+      this.testPhoneVal()
     },
-    getCity() {
-      console.log(111)
-    }
+    //验证手机号码
+    testPhoneVal() {
+      let phone = this.list[3]
+      if(testPhone(phone)) {
+        this.isShowTips = true
+        this.testInputData()
+      }else {
+        this.showWarnTips('请输入正确手机号')
+      }
+    },
+    //判断哪个输入框没填
+    testInputData() {
+      let len = this.list.length
+      for(var i = 0; i < len; i++) {
+        if(this.list[i] == undefined || isNull(this.list[i]) == false) {
+          this.checkInputData(i)
+          return 
+        }else {
+          if(this.radioVal == ''){
+            this.showWarnTips('请选择订单类型')
+          }else {
+            this.showTips('录入成功')
+          }
+        }
+      }
+    },
+    //输入框没填写的错误提示
+    showWarnTips(text) {
+      this.isShowTips = true
+      this.tipsPic = false
+      this.tipsText = text
+      setTimeout(() => {
+        this.isShowTips = false
+      }, 1500);
+    },
+    //成功提示
+    showTips(text) {
+      this.isShowTips = true
+      this.tipsPic = true
+      this.tipsText = text
+      setTimeout(() => {
+        this.isShowTips = false
+        // this.list = []
+      }, 1000);
+    },
+    //判断是哪个输入框没填
+    checkInputData(i) {
+      if(i == 0) {
+        this.showWarnTips('请输入门店名称')
+        return
+      }else if(i == 1) {
+        this.showWarnTips('请输入经销商姓名')
+        return
+      }else if(i == 2) {
+        this.showWarnTips('请输入客户姓名')
+        return
+      }
+    },
+    //判断单选框显示title
+    getTitle(val) {
+      if(val === '拼团') {
+        this.Title = this.title[0]
+      }else if(val == '满20000元') {
+        this.Title = this.title[1]
+      }else if(val == '1000元定金') {
+        this.Title = this.title[2]
+      }
+    },
+    getCity() {}
   
   }
 }
@@ -71,7 +157,7 @@ export default {
 <style lang="scss" scoped>
 .index {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgba(6, 23, 41, 1);
   .banner {
     background: url(../assets/images/banner.png) no-repeat center;
@@ -103,7 +189,7 @@ export default {
       }
     }
     .from_data {
-      z-index: 99;
+      z-index: 999;
       position: relative;
       padding: 4.26vw 5.3vw;
       height:90vw;
@@ -126,6 +212,9 @@ export default {
         color:  #68b9fe;
         justify-content: space-between
       }
+      .raidoCom {
+        padding-right:6vw; 
+      }
       .pullDown {
         background: url(../assets/images/pulldown.png) no-repeat center;
         background-size: 100% 100%;
@@ -138,20 +227,20 @@ export default {
         width: 46.93vw;
         height: 15.86vw;
         position: absolute;
-        bottom: -7.98vw;
+        bottom: -20.86vw;
         left: 23.47vw;
       }
     }
   }
-  
   .footer {
     background: url(../assets/images/footer.png) no-repeat center;
     background-size: 100% 100%;
     width: 100%;
     height: 83.33vw;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    margin-top: -31vw;
+    // position: fixed;
+    // bottom: 0;
+    // left: 0;
   }
   .showTips {
     position: fixed;

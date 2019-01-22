@@ -1,13 +1,18 @@
 <template>
   <div class="tips">
-    <div class="tick"></div>
+    <div class="tick" v-show="tipsPic"></div>
+    <div class="warn" v-show="!tipsPic"></div>
     <p>{{ tipsText }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['tipsText']
+  props: ['tipsText', 'tipsPic'],
+  data() {
+    return {
+    }
+  }
 }
 </script>
 
@@ -25,6 +30,12 @@ export default {
   justify-content: center;
   .tick {
     background: url(../assets/images/tick.png) no-repeat center;
+    background-size: 100% 100%;
+    width: 20vw;
+    height: 20vw;
+  }
+  .warn {
+    background: url(../assets/images/warn.png) no-repeat center;
     background-size: 100% 100%;
     width: 20vw;
     height: 20vw;
