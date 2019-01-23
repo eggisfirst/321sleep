@@ -3,27 +3,31 @@
     <input 
       type="radio" 
       name="radioComp"
-      id="one" value="拼团" 
+      id="radio-one" 
+      value="拼团" 
+      @change="updataInp"
       v-on:input="$emit('input', $event.target.value)">
-    <label for="one">
+    <label for="radio-one">
       <p class="one">拼团</p>
     </label>
     <input 
       type="radio" 
       name="radioComp"
-      id="two" 
+      id="radio-two" 
       value="满20000元" 
+      @change="updataInp"
       v-on:input="$emit('input', $event.target.value)">
-    <label for="two" class="center">
+    <label for="radio-two" class="center">
       <p class="two">满20000元</p>
     </label>
     <input 
       type="radio" 
       name="radioComp"
-      id="three" 
+      id="radio-three" 
       value="1000元定金" 
+      @change="updataInp"
       v-on:input="$emit('input', $event.target.value)">
-    <label for="three" class="right">
+    <label for="radio-three" class="right">
       <p class="three">1000元定金</p>
     </label>
   </div>
@@ -34,7 +38,11 @@ export default {
   props: ['value'],
   data() {
     return {
-      picked: ''
+    }
+  },
+  methods: {
+    updataInp(el) {
+      this.$emit('change', el.target.value)
     }
   }
 }

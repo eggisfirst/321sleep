@@ -80,6 +80,8 @@ button {
   background: none; }
 
 input {
+  -webkit-appearance:none;
+  border-radius:0;
   border: none;
   background: none; }
  input::-webkit-outer-spin-button,

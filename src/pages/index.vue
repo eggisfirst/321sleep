@@ -20,8 +20,8 @@
               :maxLength='item.maxLength'
               :myType='item.type'/>
           </li>
-          <li class="raidoCom">
-            <radio-comp v-model='radioVal'/>
+          <li class="raidoCom" >
+            <radio-comp v-model='radioVal' @change="changeVal"/>
           </li>
         </ul>
         <button class="btn" @click="submitData"></button>
@@ -35,9 +35,7 @@
 </template>
 
 <script>
-import sha1 from '../utils/sha1'
 import axios from 'axios' 
-import Common from '../utils/common'
 import {testPhone} from '../utils/common'
 import {isNull} from '../utils/common'
 
@@ -71,14 +69,13 @@ export default {
       tipsPic: true
     }
   },
-  watch: {
-    radioVal() {
-      this.getTitle(this.radioVal)
-    }
-  },
   methods: {
     submitData() {
       this.testPhoneVal()
+    },
+    //单选框的值变化
+    changeVal(val) {
+      this.getTitle(val)
     },
     //验证手机号码
     testPhoneVal() {

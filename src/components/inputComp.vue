@@ -6,6 +6,7 @@
       :value="value"
       :maxlength="maxLength"
       v-on:input="$emit('input', $event.target.value)"
+      @blur="fixScroll"
       >
   </div>
 </template>
@@ -16,6 +17,11 @@ export default {
   data() {
     return {
     }
+  },
+  methods: {
+    fixScroll() {
+      window.scroll(0, 0)
+    }
   }
 }
 </script>
@@ -24,7 +30,7 @@ export default {
 .inputComp {
   .input {
     font-size:4.26vw;
-    line-height: 13.3vw;
+    height: 13.3vw;
     border-bottom: 1px solid #19589a;
     width: 100%;
     background:none;  
