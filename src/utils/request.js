@@ -20,6 +20,9 @@ class Request {
         method: 'post',
         url: url,
         params: data,
+        // headers: {
+        //   'Content-Type': 'application/x-www-form-urlencoded'
+        // }
       }).then(res => {
         resolve(res)
       }).catch(err => {

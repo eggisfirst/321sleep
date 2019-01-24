@@ -10,8 +10,7 @@
         <p>{{ Title }}</p>
         <ul>
           <li class="selectCity">
-            <span>{{ textVal }}</span>
-            <div class="pullDown" @click="getCity"></div>
+            <select-city :getAreaData='getAreaData' :status='status'/>
           </li>
           <li v-for="(item, index) in text" :key='index'>
             <input-comp 
@@ -39,6 +38,7 @@ import axios from 'axios'
 import {testPhone} from '../utils/common'
 import {isNull} from '../utils/common'
 
+import SelectCity from '../components/selectCity'
 import InputComp from '../components/inputComp';
 import RadioComp from '../components/radioComp';
 import Tips from '../components/tips';
@@ -46,7 +46,7 @@ import Tips from '../components/tips';
 import {IndexModel} from '../utils/index'
 const indexModel = new IndexModel()
 export default {
-  components: { InputComp, Tips, RadioComp },
+  components: { InputComp, Tips, RadioComp, SelectCity },
   data() {
     return {
       text: [
@@ -63,25 +63,69 @@ export default {
       ],
       list:[],
       radioVal:'',
-      textVal:'请选择城市',
       tipsText: '录入成功',
       isShowTips: false,
-      tipsPic: true
+      tipsPic: true,
+      areaData: '',
+      obj: {},
+      key: true,
+      status: false
     }
   },
+  mounted() {
+  },
   methods: {
+    //提交表单
     submitData() {
       this.testPhoneVal()
     },
+    saveData(obj) {
+      this.key = false
+      indexModel.saveData(obj).then(res => {
+        if(res.data.status == 1) {
+          this.showTips('录入成功')
+          this.key = true
+        }else {
+          this.key = true
+          this.showWarnTips(res.data.msg)
+        }
+      })
+    },
+    //获取城市信息
+    getAreaData(val) {
+      this.areaData = val
+      this.status = false
+    },
     //单选框的值变化
     changeVal(val) {
+      this.radioVal = val
       this.getTitle(val)
+    },
+    //判断地区选择
+    checkAreaData() {
+      let val = this.areaData
+      if(val.province) {
+        this.obj.city = val.city
+        this.obj.province = val.province
+        this.obj.shopName = this.list[0]
+        this.obj.dealerName = this.list[1]
+        this.obj.username = this.list[2]
+        let arr = Object.keys(this.obj);
+        let len = arr.length;
+        if(len >= 7) {
+          if(this.key) {
+            this.saveData(this.obj)
+          }
+        }
+      }else {
+        this.showWarnTips('请选择城市')
+      }
     },
     //验证手机号码
     testPhoneVal() {
       let phone = this.list[3]
       if(testPhone(phone)) {
-        this.isShowTips = true
+        this.obj.phone = phone
         this.testInputData()
       }else {
         this.showWarnTips('请输入正确手机号')
@@ -94,32 +138,34 @@ export default {
         if(this.list[i] == undefined || isNull(this.list[i]) == false) {
           this.checkInputData(i)
           return 
-        }else {
-          if(this.radioVal == ''){
+        }else if(this.radioVal === ''){
+            // alert(this.radioVal,1111)
             this.showWarnTips('请选择订单类型')
-          }else {
-            this.showTips('录入成功')
-          }
+        }else {
+          this.checkAreaData()
         }
       }
     },
     //输入框没填写的错误提示
     showWarnTips(text) {
-      this.isShowTips = true
       this.tipsPic = false
       this.tipsText = text
+      this.isShowTips = true
       setTimeout(() => {
         this.isShowTips = false
       }, 1500);
     },
     //成功提示
     showTips(text) {
-      this.isShowTips = true
       this.tipsPic = true
       this.tipsText = text
+      this.isShowTips = true
       setTimeout(() => {
         this.isShowTips = false
-        // this.list = []
+        this.list = []
+        this.status = true
+        // this.radioVal = ''
+        // window.location.reload()
       }, 1000);
     },
     //判断是哪个输入框没填
@@ -139,14 +185,17 @@ export default {
     getTitle(val) {
       if(val === '拼团') {
         this.Title = this.title[0]
+        this.obj.prizeType = '321-1'
       }else if(val == '满20000元') {
         this.Title = this.title[1]
+        this.obj.prizeType = '321-2'
+        this.obj.field1 = 1
       }else if(val == '1000元定金') {
         this.Title = this.title[2]
+        this.obj.prizeType = '321-2'
+        this.obj.field1 = 2
       }
-    },
-    getCity() {}
-  
+    }
   }
 }
 </script>
@@ -201,7 +250,7 @@ export default {
         display: flex;
         align-items: center;
         font-size:4.26vw;
-        line-height: 13.3vw;
+        height: 13.3vw;
         border-bottom: 1px solid #19589a;
         width: 100%;
         background:none;  

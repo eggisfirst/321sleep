@@ -45,6 +45,8 @@ export default {
     font-weight: bold;
     color: #333;
     margin-top: 6vw;
+    text-align: center;
+    padding: 0 1vw;
   }
 }
 </style>
