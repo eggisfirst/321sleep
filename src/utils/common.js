@@ -55,3 +55,47 @@ import axios from 'axios'
     }
   }
   export {isNull}
+//判断是2019/3/24号之前
+let checkTime = () => {
+  let year = new Date().getFullYear()
+  let mouth = new Date().getMonth() + 1
+  let day = new Date().getDate()
+  // console.log(year,mouth,day,1111)
+  if(year == 2019 && mouth == 3 && day < 25) {
+    return 'begin'
+  }else if(year == 2019 && mouth < 3){
+    return 'before'
+  }else {
+    return false
+  }
+}
+export {checkTime}
+
+//返回每个时间段数字
+let countNumber = () => {
+  let year = new Date().getFullYear()
+  let mouth = new Date().getMonth() + 1
+  let day = new Date().getDate()
+  let hour = new Date().getHours()
+  let num  
+  console.log(day,hour)
+  if(year == 2019 && mouth == 3 && day < 25) {
+    if(hour == 9) {
+      num = 14*(day*3 - 2)
+      return num
+    }else if(hour == 15) {
+      num = 14*(day*3 -1)
+      return num
+    }else if(hour == 21) {
+      num = 14*(day*3)
+      return num
+    }else{
+      return false
+    }
+  }else {
+    return false
+  }
+  
+}
+
+export{countNumber}

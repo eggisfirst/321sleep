@@ -1,11 +1,11 @@
 import { Request } from './request'
 class IndexModel extends Request {
   //模拟获取抽奖类型
-  getAwardList() {
-    return this.getData({
-      url: '/good/seller',
-    })
-  }
+  // getAwardList() {
+  //   return this.getData({
+  //     url: '/good/seller',
+  //   })
+  // }
   getPro() {
     return this.getData({
       url: 'https://agency.derucci.com/v1/api/public/province'
@@ -39,6 +39,15 @@ class IndexModel extends Request {
         shopName: obj.shopName,
         dealerName: obj.dealerName,
         field1: obj.field1? obj.field1 : ''
+      }
+    })
+  }
+  getPrizes(date, type) {
+    return this.getData({
+      url: 'http://10.11.8.170:8080/api/lotteryuser/v1/getPrizes',
+      params: {
+        date: date,
+        tyep: type
       }
     })
   }

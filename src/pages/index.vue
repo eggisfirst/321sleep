@@ -3,7 +3,7 @@
     <div class="banner"></div>
     <div class="content">
       <div class="title">
-        <p>拼团客户录入</p>
+        <p>客户录入</p>
         <img src="../assets/images/line.png" alt="">
       </div>
       <div class="from_data">
@@ -37,6 +37,7 @@
 import axios from 'axios' 
 import {testPhone} from '../utils/common'
 import {isNull} from '../utils/common'
+import {checkTime} from '../utils/common'
 
 import SelectCity from '../components/selectCity'
 import InputComp from '../components/inputComp';
@@ -72,12 +73,17 @@ export default {
       status: false
     }
   },
-  mounted() {
-  },
   methods: {
     //提交表单
     submitData() {
-      this.testPhoneVal()
+      let isEndTime = checkTime()
+      if(isEndTime == 'before') {
+        alert('该活动尚未开始')
+      }else if(isEndTime == 'begin'){
+        this.testPhoneVal()
+      }else{
+        alert('该活动已结束')
+      }
     },
     saveData(obj) {
       this.key = false

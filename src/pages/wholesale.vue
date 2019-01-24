@@ -17,7 +17,7 @@
     <div class="content">
       <p>
         <span v-if="isEnd">已</span>
-        <span v-else>共</span>有 <strong>366</strong>
+        <span v-else>共</span>有 <strong>{{ num }}</strong>
         人参与拼团
       </p>
       <div class="countTime">
@@ -44,8 +44,8 @@
         <p>4月1日抽出一人免单</p>
       </div>
       <div class="free_person" v-else>
-        <h5>刘**</h5>
-        <h5>159**666666</h5>
+        <h5>{{ username }}</h5>
+        <h5>{{ phone }}</h5>
       </div>
     </div>
     <div class="footer"></div>
@@ -56,8 +56,13 @@
 </template>
 
 <script>
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+import {IndexModel} from '../utils/index'
+const indexModel = new IndexModel()
 import ShowRules from '../components/showRules';
-import {time} from '../utils/countTime'
+
+import {countNumber} from '../utils/common'
 export default {
   components: { ShowRules },
   data() {
@@ -68,7 +73,11 @@ export default {
       day: '',
       hour: '',
       minute: '',
-      seconds: ''
+      seconds: '',
+      num: '',
+      username: '',
+      phone: '',
+      key: true
     }
   },
   watch: {
@@ -77,9 +86,39 @@ export default {
     }
   },
   mounted() {
+    this.getPrizes()
     this.time()
+    this.connection()
   },
   methods: {
+    //websocket
+    connection() {
+      let sock = new SockJS("http://10.11.8.207/endpointChat");
+      // let sock = new SockJS("https://derucci.net/endpointChat");
+      this.stompClient = Stomp.over(sock);
+      this.stompClient.connect({}, () => {
+        this.stompClient.subscribe('/topic/groupBooking/count', (res) => {
+          if(res.body) {
+            this.countNum(res.body)
+          }
+        });
+      });
+    },
+    //判断人数
+    countNum(joinNum) {
+      var tempNum = countNumber()
+      if(tempNum) {
+        this.num = tempNum
+        localStorage.setItem("num",tempNum)
+      }else {
+        let n = parseInt(localStorage.getItem("num")) 
+        if(joinNum < n) {
+          this.num = n
+        }else {
+          this.num = joinNum
+        }
+      }
+    },
     //倒计时
     time() {
       let endTime = new Date('2019/03/24 23:59:59').getTime() + 1000;
@@ -104,10 +143,22 @@ export default {
       let mouth = new Date().getMonth() + 1
       // let minute = new Date().getMinutes()
       if(year == 2019 && mouth == 4 && day == 1) {
-        this.freeStatus = false
+        this.getPrizes()
       }else {
         return 
       }
+    },
+    getPrizes() {
+      let date = '2018-04-01'
+      let type = '321-1'
+      indexModel.getPrizes(date, type).then(res => {
+        console.log('data',res.data.name)
+        if(res.data.username) {
+          this.freeStatus = false
+          this.username = res.data.username
+          this.phone = res.data.phone
+        }
+      })
     },
     //展示活动规则
     showBtn() {
