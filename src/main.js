@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import '../mock/index'
+// import '../mock/index'
 Vue.config.productionTip = false
-
+import 'mint-ui/lib/style.min.css'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

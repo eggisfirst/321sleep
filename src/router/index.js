@@ -6,9 +6,14 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/pintuan',
       name: 'index',
       component: resolve => require(['@/pages/index'], resolve)
+    },
+    {
+      path: '/collect',
+      name: 'wholesale',
+      component: resolve => require(['@/pages/wholesale'], resolve)
     }
   ]
 })

@@ -1,23 +1,56 @@
 import { Request } from './request'
-
 class IndexModel extends Request {
   //模拟获取抽奖类型
-  getAwardList() {
-    return this.getData({
-      url: '/good/seller',
-    })
-  }
-  //抽奖接口
-  // getDrawLottery(prizeId, drawNum) {
+  // getAwardList() {
   //   return this.getData({
-  //     url: '/lotteryWinner/drawLottery',
-  //     params: {
-  //       prizeId: prizeId, // 奖品id
-  //       drawNum:  drawNum// 抽奖人数
-  //     }
+  //     url: '/good/seller',
   //   })
   // }
-
+  getPro() {
+    return this.getData({
+      url: 'https://agency.derucci.com/v1/api/public/province'
+    })
+  }
+  getCity(code) {
+    return this.getData({
+      url: 'https://agency.derucci.com/v1/api/public/city',
+      params: {
+        province: code
+      }
+    })
+  }
+  getArea(code) {
+    return this.getData({
+      url: 'https://agency.derucci.com/v1/api/public/area',
+      params: {
+        city: code
+      }
+    })
+  }
+  saveData(obj) {
+    return this.getPostData({
+      url: "http://10.11.8.170:8080/api/lotteryuser/v1/save",
+      data: {
+        prizeType: obj.prizeType,
+        username: obj.username,
+        phone: obj.phone,
+        province: obj.province,
+        city: obj.city,
+        shopName: obj.shopName,
+        dealerName: obj.dealerName,
+        field1: obj.field1? obj.field1 : ''
+      }
+    })
+  }
+  getPrizes(date, type) {
+    return this.getData({
+      url: 'http://10.11.8.170:8080/api/lotteryuser/v1/getPrizes',
+      params: {
+        date: date,
+        type: type
+      }
+    })
+  }
 }
 
 export { IndexModel }
