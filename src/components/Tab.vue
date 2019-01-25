@@ -1,6 +1,6 @@
 <template>
     <div class="tab">
-      <router-link :to="{path:item.link,query:{page:index}}" @click.native="changeBtn(index)"  v-for="(item,index) in link" :key="index" :class="{'router-link-exact-active':i==index}">
+      <router-link :to="{path:item.link,query:{page:index}}" exact @click.native="changeBtn(index)"  v-for="(item,index) in link" :key="index" :class="{'router-link-exact-active':i==index}">
           <img :src='item.imgUrl' alt="">
           <span>{{item.name}}</span>
       </router-link> 

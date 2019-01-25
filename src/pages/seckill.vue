@@ -1,8 +1,8 @@
 <template>
-  <div class="index">
+  <div class="seckill">
     <div class="banner"></div>
-    <time-bar :list="list"/>
-    <tab :link="link"/>
+    <time-bar :list="secList"/>
+    <tab :link="secLink"/>
     <div class="content">
       <router-view></router-view>
     </div>
@@ -18,14 +18,14 @@ export default {
   name: 'seckill',
   data () {
     return {
-      
     }
   },
   computed:{
     ...mapState({
-      list:state=>state.seckill.seckill,
-      link:state=>state.seckill.path
+      secList:state=>state.seckill.seckill,
+      secLink:state=>state.seckill.path,
     })
+    
   }
   ,
   components: {
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.index {
+.seckill{
   width: 100vw;
   height: 100vh;
   overflow:scroll;

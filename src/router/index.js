@@ -17,23 +17,20 @@ export default new Router({
     },
     {
       path: '/draw',
-      name: 'lottery',
+      name: 'draw',
       component: resolve => require(['@/pages/lottery'], resolve),
       redirect: '/draw/list',
       children: [
         {
           path: '/draw/list',
-          name: 'lotteryList',
           component: resolve => require(['@/components/List'], resolve)
         },
         {
           path: '/draw/rule',
-          name: 'lotteryRule',
           component: resolve => require(['@/components/Rule'], resolve)
         },
         {
           path: '/draw/award',
-          name: 'lotteryAward',
           component: resolve => require(['@/components/Award'], resolve)
         }
 
@@ -42,22 +39,19 @@ export default new Router({
     {
       path: '/seckill',
       name: 'seckill',
-      component: resolve => require(['@/pages/lottery'], resolve),
+      component: resolve => require(['@/pages/seckill'], resolve),
       redirect: '/seckill/list',
       children: [
         {
           path: '/seckill/list',
-          name: 'seckillList',
           component: resolve => require(['@/components/List'], resolve)
         },
         {
           path: '/seckill/rule',
-          name: 'seckillRule',
           component: resolve => require(['@/components/Rule'], resolve)
         },
         {
           path: '/seckill/award',
-          name: 'seckillAward',
           component: resolve => require(['@/components/Award'], resolve)
         }
 

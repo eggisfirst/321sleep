@@ -15,10 +15,9 @@ import { mapState } from 'vuex'
 import TimeBar from "@/components/TimeBar"
 import Tab from "@/components/Tab"
 export default {
-  name: 'lottery',
+  name: 'draw',
   data () {
     return {
-      
     }
   },
   computed:{
