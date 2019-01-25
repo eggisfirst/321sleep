@@ -44,9 +44,9 @@ export default {
     font-size: 4.8vw;
     font-weight: bold;
     color: #333;
-    margin-top: 6vw;
+    margin-top: 5vw;
     text-align: center;
-    padding: 0 1vw;
+    // padding: 0 1vw;
   }
 }
 </style>

@@ -36,6 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .showRules {
+  height: 100%;
   .rules {
     margin-left: 5vw;
     margin-top: 24vw;
@@ -45,6 +46,8 @@ export default {
     background:rgba(239,239,244,1);
     box-shadow:0px 0.8vw 1.06vw 0px rgba(0, 0, 0, 0.2);
     border-radius:2.13vw;
+    height: 60%;
+    overflow: scroll;
     h1 {
       color: #333;
       font-size: 5.6vw;

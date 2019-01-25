@@ -99,3 +99,36 @@ let countNumber = () => {
 }
 
 export{countNumber}
+
+let phoneDisplay = (phone) => {
+  let str2 = phone.substr(0,3)+"****"+ phone.substr(7);
+  return str2
+}
+export {phoneDisplay}
+
+let usernameDisplay = (name) => {
+  return new Array(name.length).join('*') + name.substr(-1);
+  // let newName = name.replace(/.(?=.)/g, '*');
+  // return newName
+}
+
+export {usernameDisplay}
+
+let nameDisplay = (name) => {
+  let newStr;
+  if (name.length === 2) {
+  newStr = name.substr(0, 1) + '*';
+  } else if (name.length > 2) {
+    let char = '';
+    for (let i = 0, len = name.length - 2; i < len; i++) {
+      char += '*';
+    }
+    newStr = name.substr(0, 1) + char + name.substr(-1, 1);
+  } else {
+    newStr = name;
+  }
+
+  return newStr;
+ }
+
+ export {nameDisplay}

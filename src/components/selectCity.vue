@@ -57,22 +57,22 @@ export default {
       obj: {}
     }
   },
-  props: ['getAreaData', 'status'],
+  props: ['getAreaData'],
   mounted() {
     this.getProvince()
   },
-  watch:{
-    status() {
-      if(this.status) {
-        this.obj = {}
-        this.citySlots = []
-        this.areaSlots = []
-        this.provinceSlots= []
-        this.getProvince()
-        this.getAreaData(this.obj)
-      }
-    }
-  },
+  // watch:{
+  //   status() {
+  //     if(this.status) {
+  //       this.obj = {}
+  //       this.citySlots = []
+  //       this.areaSlots = []
+  //       this.provinceSlots= []
+  //       this.getProvince()
+  //       this.getAreaData(this.obj)
+  //     }
+  //   }
+  // },
   methods: {
     //阻止插件穿透滑动
     handleTouchmove(e) {
@@ -122,6 +122,14 @@ export default {
     getCity(provinceCode) {
       indexModel.getCity(provinceCode).then(res => {
         this.citys = res.data
+        if(this.citys.length == 0) {
+          this.obj = {
+            province: this.province,
+            city: '',
+            area: ''
+          }
+          this.getAreaData(this.obj)
+        }
         this.cityArr = this.getName(res.data)
         this.cityArr.unshift('请选择城市')
           this.citySlots = [{
@@ -134,6 +142,14 @@ export default {
       indexModel.getArea(cityCode).then(res => {
         this.areas = res.data
         this.areaArr = this.getName(res.data)
+        if(this.areas.length == 0) {
+          this.obj = {
+            province: this.province,
+            city: this.city,
+            area: ''
+          }
+          this.getAreaData(this.obj)
+        }
         this.areaArr.unshift('请选择地区')
         this.areaSlots =[{
           values: this.areaArr,
@@ -178,7 +194,8 @@ export default {
     .mint-popup{
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
+      width: 100%;
       // align-items: flex-start;
     }
   }
@@ -194,5 +211,18 @@ export default {
       height: 2.8vw;
     }
   }
-  
+  .provincePicker {
+    flex: 0.3;
+  }
+  .cityPicker{
+    flex: 0.3;
+  }
+  .areaPicker {
+    flex: 0.3;
+  }
+
+    .picker-item{
+      font-size:3.38vw;
+    }
+
 </style>

@@ -63,6 +63,7 @@ const indexModel = new IndexModel()
 import ShowRules from '../components/showRules';
 
 import {countNumber} from '../utils/common'
+import {phoneDisplay, nameDisplay} from '../utils/common'
 export default {
   components: { ShowRules },
   data() {
@@ -81,12 +82,13 @@ export default {
     }
   },
   watch: {
-    minute() {
-      this.getFreeMan()
-    }
+    // min() {
+    //   console.log(11111111)
+    //   this.getFreeMan()
+    // }
   },
   mounted() {
-    this.getPrizes()
+    this.getFreeMan()
     this.time()
     this.connection()
   },
@@ -141,22 +143,22 @@ export default {
       let year = new Date().getFullYear()
       let day = new Date().getDate()
       let mouth = new Date().getMonth() + 1
-      // let minute = new Date().getMinutes()
-      if(year == 2019 && mouth == 4 && day == 1) {
+      let hour = new Date().getHours()
+      if(year == 2019 && mouth == 4 && day == 1 && hour == 11) {
         this.getPrizes()
       }else {
         return 
       }
     },
     getPrizes() {
-      let date = '2018-04-01'
+      let date = '2019-04-01 11'
       let type = '321-1'
       indexModel.getPrizes(date, type).then(res => {
-        console.log('data',res.data.name)
-        if(res.data.username) {
+        console.log('data',res.data[0].username)
+        if(res.data[0].username) {
           this.freeStatus = false
-          this.username = res.data.username
-          this.phone = res.data.phone
+          this.username = nameDisplay(res.data[0].username)
+          this.phone = phoneDisplay(res.data[0].phone)
         }
       })
     },

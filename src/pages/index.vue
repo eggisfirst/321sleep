@@ -10,7 +10,7 @@
         <p>{{ Title }}</p>
         <ul>
           <li class="selectCity">
-            <select-city :getAreaData='getAreaData' :status='status'/>
+            <select-city :getAreaData='getAreaData' />
           </li>
           <li v-for="(item, index) in text" :key='index'>
             <input-comp 
@@ -78,7 +78,8 @@ export default {
     submitData() {
       let isEndTime = checkTime()
       if(isEndTime == 'before') {
-        alert('该活动尚未开始')
+        // alert('该活动尚未开始')
+        this.testPhoneVal()
       }else if(isEndTime == 'begin'){
         this.testPhoneVal()
       }else{
@@ -100,7 +101,7 @@ export default {
     //获取城市信息
     getAreaData(val) {
       this.areaData = val
-      this.status = false
+      // this.status = false
     },
     //单选框的值变化
     changeVal(val) {
@@ -168,8 +169,9 @@ export default {
       this.isShowTips = true
       setTimeout(() => {
         this.isShowTips = false
-        this.list = []
-        this.status = true
+        this.$router.go(0)
+        // this.list = []
+        // this.status = true
         // this.radioVal = ''
         // window.location.reload()
       }, 1000);

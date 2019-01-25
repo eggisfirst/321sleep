@@ -47,7 +47,7 @@ class IndexModel extends Request {
       url: 'http://10.11.8.170:8080/api/lotteryuser/v1/getPrizes',
       params: {
         date: date,
-        tyep: type
+        type: type
       }
     })
   }
