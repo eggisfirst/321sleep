@@ -3,7 +3,7 @@
     <div class="banner"></div>
     <div class="content">
       <div class="title">
-        <p>客户录入</p>
+        <p>客户信息录入</p>
         <img src="../assets/images/line.png" alt="">
       </div>
       <div class="from_data">
@@ -141,13 +141,17 @@ export default {
     //判断哪个输入框没填
     testInputData() {
       let len = this.list.length
+      let time = 0
       for(var i = 0; i < len; i++) {
         if(this.list[i] == undefined || isNull(this.list[i]) == false) {
           this.checkInputData(i)
-          return 
-        }else if(this.radioVal === ''){
-            // alert(this.radioVal,1111)
-            this.showWarnTips('请选择订单类型')
+        }else {
+          time += 1
+        }
+      }
+      if(time == 4) {
+        if(this.radioVal === ''){
+          this.showWarnTips('请选择订单类型')
         }else {
           this.checkAreaData()
         }
@@ -230,7 +234,7 @@ export default {
         font-weight:bold;
         color: rgba(255, 255, 255, 1);
         line-height:6.4vw;
-        text-shadow:0 0.4vw 0.3vw rgba(26,39,76,0.58);
+        text-shadow:0 0.4vw 0.3vw rgba(26,39,76,0.28);
         -webkit-text-stroke:1px undefined;
         text-stroke:1px undefined;
         background:linear-gradient(0deg,rgba(101,177,255,1) 0%, rgba(236,245,254,1) 34.5703125%, rgba(101,177,255,1) 67.8955078125%, rgba(239,245,252,1) 100%);

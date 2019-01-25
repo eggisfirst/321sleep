@@ -196,6 +196,7 @@ export default {
       flex-direction: row;
       justify-content: space-between;
       width: 100%;
+      height: 60vw;
       // align-items: flex-start;
     }
   }
