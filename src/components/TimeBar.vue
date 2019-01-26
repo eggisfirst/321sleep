@@ -1,11 +1,13 @@
 <template>
     <div class="bar">
-      <div class="bar_percent" :style="{width:width}"></div>
+      <div class="bar_percent" :style="{width:list.timeList[list.isActive].percent}"></div>
       <div class="list">
-            <div class="list_item" v-for="(item,index) in listAttr" :key="index">           
+            <div class="list_item" v-for="(item,index) in list.timeList" :key="index">           
                 <p>{{item.date}}</p>
-                <img src="../assets/images/in.png" alt="" v-if="item.on">
-                <img src="../assets/images/out.png" alt="" v-else>
+                <div @click="changeItem(index)">
+                  <img src="../assets/images/in.png" alt="" v-if="list.isActive==index">
+                  <img src="../assets/images/out.png" alt="" v-else>
+                </div> 
                 <p>{{item.time}}</p>
             </div>
       </div>
@@ -20,15 +22,21 @@ export default {
   props:['list'],
   data () {
     return {
-      listAttr:this.list,
-      width:'12.5%'
+     
     }
   },
   created(){
     
   },
   methods:{
-   
+   changeItem(index){
+     if(this.$route.path=='/seckill'){
+        this.$store.commit('seckill/setTimeBar', index);
+      }
+      if(this.$route.path=='/draw'){
+        this.$store.commit('lottery/setTimeBar', index);
+      } 
+   }
   }
 }
 </script>

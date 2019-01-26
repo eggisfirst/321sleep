@@ -2,10 +2,10 @@
   <div class="seckill">
     <div class="banner"></div>
     <time-bar :list="secList"/>
-    <tab :link="secLink"/>
-    <div class="content">
+    <tab :list="secLink"/>
+    <!-- <div class="content">
       <router-view></router-view>
-    </div>
+    </div> -->
     <div class="footer"></div>
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
   },
   computed:{
     ...mapState({
-      secList:state=>state.seckill.seckill,
-      secLink:state=>state.seckill.path,
+      secList:state=>state.seckill.timeBar,
+      secLink:state=>state.seckill.list,
     })
     
   }

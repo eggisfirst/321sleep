@@ -1,37 +1,46 @@
 <template>
-    <div class="tab">
-      <router-link :to="{path:item.link,query:{page:index}}" exact @click.native="changeBtn(index)"  v-for="(item,index) in link" :key="index" :class="{'router-link-exact-active':i==index}">
+    <div class="">
+     <ul class="tab" >
+        <li v-for="(item,index) in list.tabItem" :key="index" :class="{'on':list.isOn==index}" @click="changeItem(index)">
           <img :src='item.imgUrl' alt="">
           <span>{{item.name}}</span>
-      </router-link> 
-     
+        </li>
+     </ul>
+     <div class="content">
+       <component :is="list.currentTab"></component>
+     </div>
     </div>  
 </template>
 
 <script>
-
+import List from "@/components/List"
+import Rule from "@/components/Rule"
+import Award from "@/components/Award"
 export default {
   name:'Tab',
-  props:['link'],
+  props:['list'],
   data () {
     return {
       i:0
     }
   },
+  components:{
+    List,
+    Rule,
+    Award
+  },
   created(){
-    var i=this.$route.query.page;
-    if(i=='undefined'||i==''||i==null){
-      this.i=0;
-    }else{
-      this.i=i;
-    }
-    
-    
+   
   },
   methods:{
-   changeBtn(i){
-    this.i=i;
-   }
+    changeItem(index){
+      if(this.$route.path=='/seckill'){
+        this.$store.commit('seckill/setOn', index);
+      }
+      if(this.$route.path=='/draw'){
+        this.$store.commit('lottery/setOn', index);
+      } 
+    },
   }
 }
 </script>
@@ -44,7 +53,7 @@ export default {
   align-items: center;
   justify-content:space-between;
   margin:.4rem auto 0;
-  a{
+  li{
     display: flex;
     width:.3rem;
     height:.3rem;
@@ -64,7 +73,7 @@ export default {
       color:#fff; 
     }
   }
-  .router-link-exact-active{
+  li.on{
     width:.84rem;
     background: #2E82C9;
     
@@ -78,5 +87,8 @@ export default {
   }
   
 }
-
+ .content{
+    position: relative;
+    z-index: 10;
+  }
 </style>

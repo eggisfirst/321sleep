@@ -2,10 +2,7 @@
   <div class="index">
     <div class="banner"></div>
     <time-bar :list="list"/>
-    <tab :link="link"/>
-    <div class="content">
-      <router-view></router-view>
-    </div>
+    <tab :list="link"/>
     <div class="footer"></div>
   </div>
 </template>
@@ -22,8 +19,8 @@ export default {
   },
   computed:{
     ...mapState({
-      list:state=>state.lottery.lottery,
-      link:state=>state.lottery.path
+      list:state=>state.lottery.timeBar,
+      link:state=>state.lottery.list
     })
   },
   components: {
