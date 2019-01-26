@@ -7,7 +7,7 @@
         </li>
      </ul>
      <div class="content">
-       <component :is="list.currentTab"></component>
+       <component :is="list.currentTab" :list="list.diff"></component>
      </div>
     </div>  
 </template>

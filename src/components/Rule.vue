@@ -1,6 +1,6 @@
 <template>
     <div class="rule">
-      <div class="lottery_rule">
+      <div class="lottery_rule" v-if="list.drawRule">
         <p>1、参与方式：3月1日至活动当天消费满20000元且当天到店；</p>
         <p>2、中奖名单分4个时段抽取，抽取安排如下：</p>
         <div><img src="../assets/images/table.png" alt=""></div>
@@ -10,7 +10,7 @@
         <p>6、如有疑问可以拨打客服热线：400-777-0077</p>
         <p>7、活动最终解释权归慕思寝室用品有限公司所有</p>
       </div>
-      <div class="miaosha_rule" style="display:none">
+      <div class="miaosha_rule" v-else>
         <p>1、参与方式(满足其中一种方式即可）：</p>
         <p>A.消费满额：3月1日至活动当天消费满20000元且当天到店</p>
         <p>B.缴纳定金：到当地慕思门店缴纳1000元秒杀定金</p>
@@ -31,7 +31,7 @@
 
 export default {
   name:'rule',
-  props:[],
+  props:['list'],
   data () {
     return {
      

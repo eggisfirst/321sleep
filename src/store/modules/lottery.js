@@ -46,7 +46,14 @@ const state = {
     ],
     isOn: 0,
     currentTab: 'List',
-    contentTab: ['List', 'Rule', 'Award']
+    contentTab: ['List', 'Rule', 'Award'],
+    diff: {
+      draw: true,
+      seckill: false,
+      drawRule: true,
+      drawAward: true,
+      table: []
+    }
   }
 }
 

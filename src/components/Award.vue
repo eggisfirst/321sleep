@@ -1,6 +1,6 @@
 <template>
     <div class="award">
-      <div class="lottery_award">
+      <div class="lottery_award" v-if="list.drawAward">
         <div class="item">
             <img src="../assets/images/phone.png" alt="">
             <div>
@@ -23,7 +23,7 @@
             </div>
         </div>
       </div>
-      <div class="miaosha_award"  style="display:none">
+      <div class="miaosha_award"  v-else>
         <div class="item">
             <h1>【秒杀床垫】</h1>
             <p class="sm">&nbsp;&nbsp;歌蒂娅 MCG1-001B</p>
@@ -43,7 +43,7 @@
 
 export default {
   name:'award',
-  props:[],
+  props:['list'],
   data () {
     return {
      

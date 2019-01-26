@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-      <div class="lottery_table">
+      <div class="lottery_table" v-if="list.draw">
         <div class="th">
           <div>姓名</div>
           <div>手机号</div>
@@ -67,7 +67,7 @@
           <div>华为Mate 20 Pro</div>
         </div>
       </div>
-      <div class="miaosha_table" style="display:none">
+      <div class="miaosha_table" v-else-if="list.seckill">
         <div class="th">
           <div>姓名</div>
           <div>手机号</div>
@@ -89,7 +89,7 @@
           <div>137****0578</div>
         </div>
       </div>
-      <div class="nothing" style="display:none">
+      <div class="nothing" v-else>
         <div class="th">
           <div>姓名</div>
           <div>手机号</div>
@@ -104,14 +104,19 @@
 
 export default {
   name:'list',
-  props:[],
+  props:['list'],
   data () {
     return {
-     
     }
+  },
+  computed:{
+
   },
   created(){
     
+  },
+  mounted(){
+   
   },
   methods:{
    
