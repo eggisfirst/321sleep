@@ -9,6 +9,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import {IndexModel} from '../utils/index'
+const indexModel = new IndexModel()
 import TimeBar from "@/components/TimeBar"
 import Tab from "@/components/Tab"
 export default {
@@ -28,7 +30,14 @@ export default {
     Tab,
   },
   created() {
-   
+    let date='2019-03-09 15';
+    let type='321-2';
+    indexModel.getPrizes(date,type).then(res=>{
+      console.log(res.data);
+      if(res.data.length==0){
+        this.$store.commit('seckill/showNone');
+      }
+    })
   },
   methods: {
    

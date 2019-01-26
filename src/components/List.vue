@@ -72,22 +72,11 @@
           <div>姓名</div>
           <div>手机号</div>
         </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
+        <div class="td" v-for="(item,index) in list.winList" :key="index">
+          <div>{{item.username}}</div>
+          <div>{{item.phone}}</div>
         </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-        </div>
+       
       </div>
       <div class="nothing" v-else>
         <div class="th">
@@ -135,6 +124,7 @@ export default {
     background:#113F6F;
     padding-bottom:.1rem;
     .th{
+      overflow:hidden;
       display:flex;
       flex-direction:row;
       align-items:center;

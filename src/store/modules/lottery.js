@@ -52,7 +52,8 @@ const state = {
       seckill: false,
       drawRule: true,
       drawAward: true,
-      table: []
+      winList: [],
+      prizeList: []
     }
   }
 }
@@ -64,6 +65,13 @@ const mutations = {
   },
   setTimeBar: (state, index) => {
     state.timeBar.isActive = index
+  },
+  showNone: (state) => {
+    state.list.diff.draw = false
+    state.list.diff.seckill = false
+  },
+  setWinList: (state, array) => {
+    state.list.diff.winList = array
   }
 }
 

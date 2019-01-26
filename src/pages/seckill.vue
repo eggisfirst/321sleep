@@ -12,6 +12,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import {IndexModel} from '../utils/index'
+const indexModel = new IndexModel()
 import TimeBar from "@/components/TimeBar"
 import Tab from "@/components/Tab"
 export default {
@@ -25,18 +27,29 @@ export default {
       secList:state=>state.seckill.timeBar,
       secLink:state=>state.seckill.list,
     })
-    
-  }
-  ,
+  },
   components: {
     TimeBar,
     Tab,
   },
   created() {
-   
+    let date='2019-03-09 18';
+    let type='321-2';
+    indexModel.getPrizes(date,type).then(res=>{
+      console.log(res);
+      if(res.data.length==0){
+        this.$store.commit('seckill/showNone');
+      }else{
+         this.$store.commit('seckill/setWinList',res.data);
+      }
+    })
   },
   methods: {
    
+  },
+  beforeRouteEnter(to,from,next){
+    console.log(to.path);
+    next();
   }
 }
 </script>

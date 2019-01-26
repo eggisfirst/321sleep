@@ -16,7 +16,9 @@
 </template>
 
 <script>
-
+import { mapState } from "vuex"
+import {IndexModel} from '../utils/index'
+const indexModel = new IndexModel()
 export default {
   name:'TimeBar',
   props:['list'],
@@ -28,13 +30,46 @@ export default {
   created(){
     
   },
+  computed:{
+    ...mapState({
+      drawTimeList:state=>state.lottery.timeBar.timeList,
+      drawTimeIndex:state=>state.lottery.timeBar.isActive,
+      seckillTimeList:state=>state.seckill.timeBar.timeList,
+      seckillTimeIndex:state=>state.seckill.timeBar.isActive
+    })
+  },
   methods:{
    changeItem(index){
      if(this.$route.path=='/seckill'){
-        this.$store.commit('seckill/setTimeBar', index);
+        this.$store.commit('seckill/setTimeBar', index)
+        let date=this.seckillTimeList[this.seckillTimeIndex].datetime
+        let type="321-2"
+        console.log(date);
+         indexModel.getPrizes(date,type).then(res=>{
+           console.log("秒杀");
+           console.log(res.data);
+          if(res.data.length>0){
+            this.$store.commit('seckill/setWinList',res.data)
+          }else{
+            this.$store.commit('seckill/showNone')
+          }
+        })
       }
       if(this.$route.path=='/draw'){
-        this.$store.commit('lottery/setTimeBar', index);
+        this.$store.commit('lottery/setTimeBar', index)
+        let date=this.drawTimeList[this.drawTimeIndex].datetime
+        let type="321-2"
+        console.log(date);
+        indexModel.getPrizes(date,type).then(res=>{
+          console.log("抽奖");
+           console.log(res.data);
+          if(res.data.length>0){
+            this.$store.commit('lottery/setWinList',res.data)
+          }else{
+            this.$store.commit('lottery/showNone')
+          }
+        })
+        
       } 
    }
   }
