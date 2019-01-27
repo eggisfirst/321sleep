@@ -50,7 +50,8 @@ export default {
 .rule{
   font-size: .12rem;
   color:#2E82C9;
-  margin:.15rem auto 0;
+  margin:.15rem auto;
+  
   .lottery_rule{
     width:89.33vw;
     margin:0 auto;

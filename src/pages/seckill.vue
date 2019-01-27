@@ -3,9 +3,6 @@
     <div class="banner"></div>
     <time-bar :list="secList"/>
     <tab :list="secLink"/>
-    <!-- <div class="content">
-      <router-view></router-view>
-    </div> -->
     <div class="footer"></div>
   </div>
 </template>
@@ -58,21 +55,15 @@ export default {
 .seckill{
   width: 100vw;
   height: 100vh;
-  overflow:scroll;
+  position:relative;
+  overflow-y:scroll;
   background-color: rgba(6, 23, 41, 1);
-  /* padding-bottom: .3rem; */
   .banner {
     background: url(../assets/images/banner_ms.png) no-repeat center;
     background-size: 100% 100%;
     width: 100%;
     height: 50vw;
   }
-  
-  .content{
-    position: relative;
-    z-index: 10;
-  }
-  
   .footer {
     background: url(../assets/images/footer.png) no-repeat center;
     background-size: 100% 100%;
@@ -81,6 +72,7 @@ export default {
     position: fixed;
     bottom: 0;
     left: 0;
+    pointer-events:none;
   }
 }
 
