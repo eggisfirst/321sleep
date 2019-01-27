@@ -6,65 +6,10 @@
           <div>手机号</div>
           <div>奖品</div>
         </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
-        </div>
-        <div class="td">
-          <div>Jane</div>
-          <div>137****0578</div>
-          <div>华为Mate 20 Pro</div>
+        <div class="td" v-for="(item,index) in list.winList" :key="index">
+          <div>{{item.username}}</div>
+          <div>{{item.phone}}</div>
+          <div>{{item.prizeName}}</div>
         </div>
       </div>
       <div class="miaosha_table" v-else-if="list.seckill">

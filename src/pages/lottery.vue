@@ -35,7 +35,9 @@ export default {
     indexModel.getPrizes(date,type).then(res=>{
       console.log(res.data);
       if(res.data.length==0){
-        this.$store.commit('seckill/showNone');
+        this.$store.commit('lottery/showNone');
+      }else{
+        this.$store.commit('lottery/setWinList',res.data);
       }
     })
   },
