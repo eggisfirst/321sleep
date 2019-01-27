@@ -83,10 +83,10 @@ export default {
       padding:0 .15rem;
       box-sizing: border-box;
       :nth-child(1){
-        flex:0 0 20%;
+        flex:0 0 28%;
       }
       :nth-child(2){
-        flex:0 0 40%;
+        flex:0 0 28%;
         text-align: center;
       }
       :nth-child(3){
@@ -104,10 +104,10 @@ export default {
       color:#3F9DC5;
       box-sizing: border-box;
       :nth-child(1){
-        flex:0 0 20%;
+        flex:0 0 28%;
       }
       :nth-child(2){
-        flex:0 0 40%;
+        flex:0 0 28%;
         text-align: center;
       }
       :nth-child(3){
