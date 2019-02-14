@@ -94,7 +94,7 @@ export default {
       position: absolute;
       top:0;
       left:0;
-      transform: translate(0,-44%);
+      transform: translate(0,-47%);
       width:100%;
       display: flex;
       flex-direction: row;
