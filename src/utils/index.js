@@ -29,6 +29,7 @@ class IndexModel extends Request {
   }
   saveData (obj) {
     return this.getPostData({
+      // url: "https://derucci.net/api/lotteryuser/v1/save",
       url: 'https://agency.derucci.com/api/lotteryuser/v1/save',
       data: {
         prizeType: obj.prizeType,
@@ -44,6 +45,7 @@ class IndexModel extends Request {
   }
   getPrizes (date, type) {
     return this.getData({
+      // url: 'https://derucci.net/api/lotteryuser/v1/getPrizes',
       url: 'https://agency.derucci.com/api/lotteryuser/v1/getPrizes',
       params: {
         date: date,

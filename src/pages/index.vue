@@ -78,8 +78,8 @@ export default {
     submitData() {
       let isEndTime = checkTime()
       if(isEndTime == 'before') {
-        // alert('该活动尚未开始')
-        this.testPhoneVal()
+        alert('该活动尚未开始')
+        // this.testPhoneVal()
       }else if(isEndTime == 'begin'){
         this.testPhoneVal()
       }else{
@@ -173,11 +173,11 @@ export default {
       this.isShowTips = true
       setTimeout(() => {
         this.isShowTips = false
-        this.$router.go(0)
+        // this.$router.go(0)
         // this.list = []
         // this.status = true
         // this.radioVal = ''
-        // window.location.reload()
+        window.location.reload()
       }, 1000);
     },
     //判断是哪个输入框没填

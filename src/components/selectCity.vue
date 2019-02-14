@@ -222,8 +222,8 @@ export default {
     flex: 0.3;
   }
 
-    .picker-item{
-      font-size:3.38vw;
-    }
+  .picker-item{
+    font-size:3.38vw;
+  }
 
 </style>
