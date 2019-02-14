@@ -29,7 +29,7 @@ class IndexModel extends Request {
   }
   saveData (obj) {
     return this.getPostData({
-      url: 'http://10.11.8.170:8080/api/lotteryuser/v1/save',
+      url: 'https://agency.derucci.com/api/lotteryuser/v1/save',
       data: {
         prizeType: obj.prizeType,
         username: obj.username,
@@ -44,7 +44,7 @@ class IndexModel extends Request {
   }
   getPrizes (date, type) {
     return this.getData({
-      url: 'http://10.11.8.170:8080/api/lotteryuser/v1/getPrizes',
+      url: 'https://agency.derucci.com/api/lotteryuser/v1/getPrizes',
       params: {
         date: date,
         type: type
