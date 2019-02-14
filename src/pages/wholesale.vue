@@ -95,8 +95,8 @@ export default {
   methods: {
     //websocket
     connection() {
-      let sock = new SockJS("http://10.11.8.207/endpointChat");
-      // let sock = new SockJS("https://derucci.net/endpointChat");
+      // let sock = new SockJS("http://10.11.8.207/endpointChat");
+      let sock = new SockJS("https://derucci.net/endpointChat");
       this.stompClient = Stomp.over(sock);
       this.stompClient.connect({}, () => {
         this.stompClient.subscribe('/topic/groupBooking/count', (res) => {

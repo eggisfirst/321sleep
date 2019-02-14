@@ -6,12 +6,12 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/pintuan',
+      path: '/collect',
       name: 'index',
       component: resolve => require(['@/pages/index'], resolve)
     },
     {
-      path: '/collect',
+      path: '/pintuan',
       name: 'wholesale',
       component: resolve => require(['@/pages/wholesale'], resolve)
     },
