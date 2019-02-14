@@ -3,7 +3,9 @@ const state = {
 }
 
 const mutations = {
-  setHome: (state, arr) => state.home = arr
+  setHome: (state, arr) => {
+    state.home = arr
+  }
 }
 
 const actions = {

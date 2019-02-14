@@ -1,6 +1,6 @@
-import axios from 'axios' 
+import axios from 'axios'
 class Request {
-  getData({url, params, method = "GET" }) {
+  getData ({ url, params, method = 'GET' }) {
     return new Promise((resolve, reject) => {
       axios({
         url: url,
@@ -14,12 +14,12 @@ class Request {
     })
   }
 
-  getPostData({url, data}) {
+  getPostData ({url, data}) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
         url: url,
-        params: data,
+        params: data
         // headers: {
         //   'Content-Type': 'application/x-www-form-urlencoded'
         // }
@@ -27,7 +27,7 @@ class Request {
         resolve(res)
       }).catch(err => {
         reject(err)
-      });
+      })
     })
   }
 }
