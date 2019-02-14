@@ -1,17 +1,17 @@
 import { Request } from './request'
 class IndexModel extends Request {
-  //模拟获取抽奖类型
+  // 模拟获取抽奖类型
   // getAwardList() {
   //   return this.getData({
   //     url: '/good/seller',
   //   })
   // }
-  getPro() {
+  getPro () {
     return this.getData({
       url: 'https://agency.derucci.com/v1/api/public/province'
     })
   }
-  getCity(code) {
+  getCity (code) {
     return this.getData({
       url: 'https://agency.derucci.com/v1/api/public/city',
       params: {
@@ -19,7 +19,7 @@ class IndexModel extends Request {
       }
     })
   }
-  getArea(code) {
+  getArea (code) {
     return this.getData({
       url: 'https://agency.derucci.com/v1/api/public/area',
       params: {
@@ -27,9 +27,10 @@ class IndexModel extends Request {
       }
     })
   }
-  saveData(obj) {
+  saveData (obj) {
     return this.getPostData({
-      url: "https://derucci.net/api/lotteryuser/v1/save",
+      // url: "https://derucci.net/api/lotteryuser/v1/save",
+      url: 'https://agency.derucci.com/api/lotteryuser/v1/save',
       data: {
         prizeType: obj.prizeType,
         username: obj.username,
@@ -38,13 +39,14 @@ class IndexModel extends Request {
         city: obj.city,
         shopName: obj.shopName,
         dealerName: obj.dealerName,
-        field1: obj.field1? obj.field1 : ''
+        field1: obj.field1 ? obj.field1 : ''
       }
     })
   }
-  getPrizes(date, type) {
+  getPrizes (date, type) {
     return this.getData({
-      url: 'https://derucci.net/api/lotteryuser/v1/getPrizes',
+      // url: 'https://derucci.net/api/lotteryuser/v1/getPrizes',
+      url: 'https://agency.derucci.com/api/lotteryuser/v1/getPrizes',
       params: {
         date: date,
         type: type

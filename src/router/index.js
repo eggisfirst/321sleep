@@ -14,6 +14,16 @@ export default new Router({
       path: '/pintuan',
       name: 'wholesale',
       component: resolve => require(['@/pages/wholesale'], resolve)
+    },
+    {
+      path: '/draw',
+      name: 'draw',
+      component: resolve => require(['@/pages/lottery'], resolve)
+    },
+    {
+      path: '/seckill',
+      name: 'seckill',
+      component: resolve => require(['@/pages/seckill'], resolve)
     }
   ]
 })
