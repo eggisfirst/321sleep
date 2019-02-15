@@ -78,8 +78,8 @@ export default {
     submitData() {
       let isEndTime = checkTime()
       if(isEndTime == 'before') {
-        alert('该活动尚未开始')
-        // this.testPhoneVal()
+        // alert('该活动尚未开始')
+        this.testPhoneVal()
       }else if(isEndTime == 'begin'){
         this.testPhoneVal()
       }else{
