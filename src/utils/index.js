@@ -8,12 +8,12 @@ class IndexModel extends Request {
   // }
   getPro () {
     return this.getData({
-      url: 'https://mobiletest.derucci.net/consumer-admin/v1/api/public/province'
+      url: 'https://agency.derucci.com/v1/api/public/province'
     })
   }
   getCity (code) {
     return this.getData({
-      url: 'https://mobiletest.derucci.net/consumer-admin/v1/api/public/city',
+      url: 'https://agency.derucci.com/v1/api/public/city',
       params: {
         province: code
       }
@@ -21,7 +21,7 @@ class IndexModel extends Request {
   }
   getArea (code) {
     return this.getData({
-      url: 'https://mobiletest.derucci.net/consumer-admin/v1/api/public/area',
+      url: 'https://agency.derucci.com/v1/api/public/area',
       params: {
         city: code
       }
@@ -29,7 +29,7 @@ class IndexModel extends Request {
   }
   saveData (obj) {
     return this.getPostData({
-      url: 'https://mobiletest.derucci.net/consumer-admin/api/lotteryuser/v1/save',
+      url: 'https://agency.derucci.com/api/lotteryuser/v1/save',
       data: {
         prizeType: obj.prizeType,
         username: obj.username,
@@ -44,7 +44,7 @@ class IndexModel extends Request {
   }
   getPrizes (date, type) {
     return this.getData({
-      url: 'https://mobiletest.derucci.net/consumer-admin/api/lotteryuser/v1/getPrizes',
+      url: 'https://agency.derucci.com/api/lotteryuser/v1/getPrizes',
       params: {
         date: date,
         type: type
