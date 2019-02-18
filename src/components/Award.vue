@@ -5,21 +5,21 @@
             <img src="../assets/images/phone.png" alt="">
             <div>
               <h2>华为 Mate 20 Pro</h2>
-              <h1>10名</h1>
+              <h1>12名</h1>
             </div>
         </div>
         <div class="item">
             <img src="../assets/images/pillow.png" alt="">
             <div>
               <h2>凝胶枕</h2>
-              <h1>16名</h1>
+              <h1>24名</h1>
             </div>
         </div>
         <div class="item">
             <img src="../assets/images/quilt.png" alt="">
             <div>
               <h2>芯逸桑蚕丝薄被</h2>
-              <h1>32名</h1>
+              <h1>40名</h1>
             </div>
         </div>
       </div>
