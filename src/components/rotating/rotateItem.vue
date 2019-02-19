@@ -31,7 +31,8 @@ export default {
       ],
       hasChange: true,
       rotate:'',
-      transition: ''
+      transition: '',
+      key: true
     }
   },
   computed: {
@@ -43,17 +44,21 @@ export default {
     ...mapMutations(['setTypeCoupon']),
     //开始抽奖
     startBtn() {
-      const angleArr = getAngle()
-      const angle = getRandom(angleArr[0], angleArr[1])
-      this.rotate = angle + 1800
-      this.transition = '2s'
-      this.setTypeCoupon(angleArr[2])
-      setTimeout(() => {
-        this.rotate = 0
-        this.transition = '0s'
-        this.hasChange = false
-        this.isStart(false)
-      }, 2200);
+      if(this.key) {
+        this.key = false
+        const angleArr = getAngle()
+        const angle = getRandom(angleArr[0], angleArr[1])
+        this.rotate = angle + 1800
+        this.transition = '2s'
+        this.setTypeCoupon(angleArr[2])
+        setTimeout(() => {
+          this.rotate = 0
+          this.transition = '0s'
+          this.hasChange = false
+          this.isStart(false)
+        }, 2200);
+      }
+      
     },
     //已抽奖
     startedBtn() {
