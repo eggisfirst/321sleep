@@ -2,7 +2,7 @@
   <div class="showRules">
     <div class="rules">
       <h1>活动规则</h1>
-      <div>
+      <div v-if="showRule">
         <p>1.客户到店支付预付款2000元可参与拼团活动，全国拼团满1000人（含）则拼团成功，拼团客户可享拼团价23199元购MZZ1-013太空树脂球床垫；</p>
         <p>2.拼团人数满1000人后，客户可在3月31日24：00前，随时到门店支付拼团尾款21199元（即拼团价23199元-预付款的2000元）；</p>
         <p>3.3月31日24：00前，如仍未到门店支付尾款，则视为主动放弃拼团，预付款不退，但可作购买慕思其他产品抵扣金额；</p>
@@ -12,19 +12,33 @@
         <p>7.如有疑问请咨询客服热线：400-777-0077；</p>
         <p>8.活动最终解释权归慕思寝室用品有限公司所有。</p>
       </div>
+      <div v-else>
+        <p>1.活动期间关注慕思寝具服务号（微信号：derucci02），即可参与现金大转盘抽奖，获得相应电子现金券，凭借电子现金券可以到门店兑换实体现金券和使用;</p>
+        <p>2.现金券使用时间：3月1日-3月24日；</p>
+        <p>3.现金券类型：199元现金券/299元现金券/399元现金券/499元现金券；</p>
+        <p>4.消费满5千元方可使用现金券，不可叠加使用，单笔订单仅可使用一张；</p>
+        <p>5.现金券可当现金抵扣购买慕思门店所有正价产品，不适应本次321活动款产品，不兑现，不找赎；</p>
+        <p>6.详情请咨询：400 777 0077。</p>
+      </div>
     </div>
-    <div class="close" @click="closeBtn">
-      <div class="close_btn"></div>
+    <div class="close" >
+      <div class="close_btn" @click="closeBtn"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['changVal'],
+  props: ['changVal', 'type'],
   data() {
     return {
+      showRule: true
     }
+  },
+  mounted() {
+    if(this.type === 'rotate') {
+      this.showRule = false
+    } 
   },
   methods: {
     closeBtn() {

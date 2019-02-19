@@ -1,6 +1,7 @@
 <template>
   <div class="rotateItem">
-    <ul class="circle">
+    <ul class="circle" 
+    :style="{transform: 'rotate(' + rotate + 'deg)', transition: transition}">
       <li v-for="(item,index) in list" :key="index" :class="`${ item.side }`">
         <span class="award">{{ item.text }}</span>
       </li>
@@ -8,14 +9,18 @@
     <div class="control">
       <div class="wrapper"></div>
       <div class="point"></div>
-      <div class="begin-wrapper"></div>
-      <div class="begin">开始</div>
+      <div class="begin-wrapper" v-show="hasChange"></div>
+      <div class="begin" v-if="hasChange"  @click="startBtn">开始</div>
+      <div class="begined" v-else @click="startedBtn">开始</div>
     </div>
   </div>
 </template>
 
 <script>
+import Vuex,{ mapMutations, mapState } from 'vuex'
+import { getAngle, getRandom } from '../../utils/rotate'
 export default {
+  props: ['isStart', 'isStarted'],
   data() {
     return {
       list: [
@@ -23,7 +28,36 @@ export default {
         {side: 'right-top', text: '299元现金券'},
         {side: 'left-bottom', text: '399元现金券'},
         {side: 'right-bottom', text: '499元现金券'}
-      ]
+      ],
+      hasChange: true,
+      rotate:'',
+      transition: ''
+    }
+  },
+  computed: {
+    ...mapState({
+      typeCoupon: state => state.rotate.typeCoupon
+    })
+  },
+  methods: {
+    ...mapMutations(['setTypeCoupon']),
+    //开始抽奖
+    startBtn() {
+      const angleArr = getAngle()
+      const angle = getRandom(angleArr[0], angleArr[1])
+      this.rotate = angle + 1800
+      this.transition = '2s'
+      this.setTypeCoupon(angleArr[2])
+      setTimeout(() => {
+        this.rotate = 0
+        this.transition = '0s'
+        this.hasChange = false
+        this.isStart(false)
+      }, 2200);
+    },
+    //已抽奖
+    startedBtn() {
+      this.isStarted(true)
     }
   }
 }
@@ -33,7 +67,7 @@ export default {
 .rotateItem {
   position: relative;
   z-index: 99;
-  margin: auto;
+  margin: 0 auto;
   width: 77.73vw;
   height: 77.73vw;
   border: 1.64vw dotted rgba(137, 227, 250, 1);
@@ -41,9 +75,10 @@ export default {
   display: flex;
   align-items: center;
   ul {
-    margin-left: 2.8vw;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     span{
       color: #2a5680;
@@ -145,6 +180,20 @@ export default {
       height: 13.06vw;
       border-radius: 50%;
       background: #fff;
+      position: absolute;
+      margin-left: -6.53vw;
+      margin-top: -6.53vw;
+      text-align: center;
+      line-height: 13.06vw;
+      font-size: 4.8vw;
+      font-weight: bold;
+      color: #2a5680;
+    }
+    .begined {
+      width: 13.06vw;
+      height: 13.06vw;
+      border-radius: 50%;
+      background: #aabfd3;
       position: absolute;
       margin-left: -6.53vw;
       margin-top: -6.53vw;
