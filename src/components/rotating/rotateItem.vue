@@ -49,14 +49,14 @@ export default {
         const angleArr = getAngle()
         const angle = getRandom(angleArr[0], angleArr[1])
         this.rotate = angle + 1800
-        this.transition = '2s'
+        this.transition = '3s'
         this.setTypeCoupon(angleArr[2])
         setTimeout(() => {
           this.rotate = 0
           this.transition = '0s'
           this.hasChange = false
           this.isStart(false)
-        }, 2200);
+        }, 3200);
       }
       
     },
@@ -72,7 +72,7 @@ export default {
 .rotateItem {
   position: relative;
   z-index: 99;
-  margin: 0 auto;
+  margin: 2vw auto;
   width: 77.73vw;
   height: 77.73vw;
   border: 1.64vw dotted rgba(137, 227, 250, 1);

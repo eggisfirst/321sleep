@@ -88,17 +88,14 @@ export default {
    top: -1vw;
    right: -6vw;
  }
-  .radioComp [type='radio']:checked {
-    box-sizing: border-box;
-     width: 4vw;
-    height: 4vw;
-  }
   .radioComp [type='radio']:checked + label {
     box-sizing: border-box;
-    border: 1.2vw solid #fff;
+    // border: 1.2vw solid #fff;
+    background: #fff;
     border-radius: 50%;
     width: 4.5vw;
     height: 4.5vw;
   }
+  
 // }
 </style>

@@ -55,7 +55,7 @@ export default {
       setTimeout(() => {
         this.prize = this.typeCoupon
         this.couponStatus = true
-      }, 2200);
+      }, 3200);
     }
   },
   methods: {
@@ -144,7 +144,7 @@ export default {
     width: 100%;
     height: 83.33vw;
     position: absolute;
-    bottom: -13.33vw;
+    bottom: -10.33vw;
     left: 0;
     pointer-events:none;
   }
