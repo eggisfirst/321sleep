@@ -39,16 +39,16 @@ export default {
   align-items: center;
   .wrapper {
     width: 21.22vw; 
-    height: 6.66vw; 
+    height: 6.4vw; 
     box-sizing:border-box; 
     padding: 1px; 
     border-radius:2.13vw; 
-    background-image: linear-gradient(29deg,rgba(42,86,128,1) 0%,rgba(137,227,250,1) 100%) ;
+    background-image: linear-gradient(29deg,rgba(137,227,250,1)0%,rgba(137,227,250,0.6) 30%,rgba(42,86,128,0.6) 50%,rgba(137,227,250,1) 70%,rgba(42,86,128,0.6) 100%) ;
     .text {
       box-sizing:border-box; 
       width:100%; 
       height:100%; 
-      border-radius: 2.13vw; 
+      border-radius: 1.8vw; 
       background: linear-gradient(rgba(255,255,255,1),rgba(114,184,255,1));;
     }
   }
