@@ -32,3 +32,21 @@ function getRandom(min, max){
 }
 
 export { getRandom }
+
+//获取参数
+function getQueryString (name)  {
+  let reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i')
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) {
+    return unescape(r[2]);
+  }
+}
+export { getQueryString }
+
+//获取时间戳
+function getTimestamp() {
+  let date = new Date()
+  let timestamp = date.getTime()
+  return timestamp
+}
+export {getTimestamp}

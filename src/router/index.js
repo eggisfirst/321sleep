@@ -19,7 +19,7 @@ export default new Router({
     },
     //321大转盘活动
     {
-      path: '/rotating',
+      path: '/',
       name: 'rotating',
       component: resolve => require(['@/pages/rotating'], resolve)
     },

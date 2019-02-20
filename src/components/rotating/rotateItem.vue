@@ -9,18 +9,20 @@
     <div class="control">
       <div class="wrapper"></div>
       <div class="point"></div>
-      <div class="begin-wrapper" v-show="hasChange"></div>
-      <div class="begin" v-if="hasChange"  @click="startBtn">开始</div>
+      <div class="begin-wrapper" v-show="hasChance"></div>
+      <div class="begin" v-if="hasChance"  @click="startBtn">开始</div>
       <div class="begined" v-else @click="startedBtn">开始</div>
     </div>
   </div>
 </template>
 
 <script>
+import {IndexModel} from '../../utils/index'
+const indexModel = new IndexModel()
 import Vuex,{ mapMutations, mapState } from 'vuex'
 import { getAngle, getRandom } from '../../utils/rotate'
 export default {
-  props: ['isStart', 'isStarted'],
+  props: ['isStarted', 'isStart'],
   data() {
     return {
       list: [
@@ -29,16 +31,25 @@ export default {
         {side: 'left-bottom', text: '399元现金券'},
         {side: 'right-bottom', text: '499元现金券'}
       ],
-      hasChange: true,
       rotate:'',
       transition: '',
-      key: true
+      key: true,
+      hasChance: true
     }
   },
   computed: {
     ...mapState({
-      typeCoupon: state => state.rotate.typeCoupon
+      typeCoupon: state => state.rotate.typeCoupon,
+      isRotated: state => state.rotate.isRotated,
+      unionId: state => state.rotate.unionId
     })
+  },
+  watch: {
+    isRotated() {
+      if(!this.isRotated) {
+        this.hasChance = false
+      }
+    }
   },
   methods: {
     ...mapMutations(['setTypeCoupon']),
@@ -50,15 +61,22 @@ export default {
         const angle = getRandom(angleArr[0], angleArr[1])
         this.rotate = angle + 1800
         this.transition = '3s'
+        this.saveRotateInfo(angleArr[2])
         this.setTypeCoupon(angleArr[2])
         setTimeout(() => {
           this.rotate = 0
           this.transition = '0s'
-          this.hasChange = false
+          this.hasChance = false
           this.isStart(false)
         }, 3200);
       }
       
+    },
+    //获取抽奖信息
+    saveRotateInfo(type) {
+      indexModel.rotateSaveInfo(this.unionId,type).then(res => {
+        console.log(res)
+      })
     },
     //已抽奖
     startedBtn() {

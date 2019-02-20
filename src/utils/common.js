@@ -1,12 +1,5 @@
 import axios from 'axios' 
- // 获取时间戳
  export default class Common {
-  getTimestamp() {
-    let date = new Date()
-    let timestamp = date.getTime()
-    return timestamp
-  }
-  
   // 参数加密
   getSign(arr) {
     let str = ''
@@ -40,6 +33,8 @@ import axios from 'axios'
     })
   }
  }
+
+
   // 校验手机格式
   let testPhone = (phone) =>  {
     const phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/

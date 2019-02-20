@@ -4,7 +4,10 @@
     <div class="content">
       <p class="chance" v-if="startStatus">您有<strong> 1 </strong>次抽奖机会</p>
       <p class="nochance" v-else>您已参与过抽奖，详情请查看中奖记录</p>
-      <rotate-item :isStart='isStart' :isStarted='isStarted'/>
+      <rotate-item  
+      :isStarted='isStarted' 
+      :isStart='isStart'
+      />
       <div class="btn">
         <btn-comp :text='text[0]' @click.native="rulesClick"/>
         <btn-comp :text='text[1]' @click.native="recordsClick"/>
@@ -24,12 +27,17 @@
 </template>
 
 <script>
+import axios from 'axios'
+import {IndexModel} from '../utils/index'
+const indexModel = new IndexModel()
 import Vuex,{ mapMutations, mapState } from 'vuex'
 import RotateItem from '../components/rotating/rotateItem'
 import BtnComp from '../components/rotating/btnComp'
 import Tips from '../components/tips'
 import Rules from '../components/showRules'
 import Coupon from '../components/rotating/coupon'
+import { getTimestamp,getQueryString } from '../utils/rotate'
+
 export default {
   components: { RotateItem, BtnComp, Tips, Rules, Coupon },
   data() {
@@ -58,7 +66,45 @@ export default {
       }, 3200);
     }
   },
+  created() {
+    this.getCode()
+  },
   methods: {
+     ...mapMutations(['setIsRotated', 'setUnionId']),
+    //获取code码
+    getCode() {
+      // let url = location.href
+      // //重定向
+      // if(url.indexOf('code') == -1){
+      //   location.href = 'https://derucci.net/web/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
+      // }
+      // let code = getQueryString('code')
+      // this.getUnionId(code)
+      this.getRotateInfo()
+    },
+    //获取unionId
+    getUnionId(code) {
+      indexModel.getUnionId(code).then(res => {
+        if(res.unionId) {
+          this.setUnionId(res.unionId)
+          this.getRotateInfo(res.unionid)
+        }else {
+          alert('请不要重复刷新')
+        }
+      })
+    },
+    //验证有无抽奖
+    getRotateInfo(unionid) {
+      indexModel.rotateGetInfo(unionid).then(res => {
+        if(res.status == 1) {
+          this.startStatus = false
+          this.prize = res.data.filed1
+          this.setIsRotated(false)
+        }else {
+          this.startStatus = true
+        }
+      })
+    },
     //中奖记录
     recordsClick() {
       if(this.startStatus) {
