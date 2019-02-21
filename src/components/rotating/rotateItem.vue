@@ -34,7 +34,7 @@ export default {
       rotate:'',
       transition: '',
       key: true,
-      hasChance: true
+      hasChance: false
     }
   },
   computed: {
@@ -48,6 +48,8 @@ export default {
     isRotated() {
       if(!this.isRotated) {
         this.hasChance = false
+      }else {
+        this.hasChance = true
       }
     }
   },

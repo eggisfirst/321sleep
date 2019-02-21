@@ -70,9 +70,9 @@ class IndexModel extends Request {
     return this.getPostData({
       url: 'https://mobiletest.derucci.net/consumer-admin/api/lotteryuser/v1/saveturntable',
       data: {
-        unionId: 'o6a0M1M6d84ygn5COQvDVwDdEHu4',
+        // unionId: 'o6a0M1M6d84ygn5COQvDVwDdEHu4',
         // unionId: 'o6a0M1LJgn_Y7V2F8r92NoKIOplQ',
-        // unionId: unionId,
+        unionId: unionId,
         filed1: type
       }
     })
@@ -82,9 +82,9 @@ class IndexModel extends Request {
     return this.getData({
       url: 'https://mobiletest.derucci.net/consumer-admin/api/lotteryuser/v1/turntable',
       params: {
-        // unionId: unionId
+        unionId: unionId
         // unionId: 'o6a0M1LJgn_Y7V2F8r92NoKIOplQ'
-        unionId: 'o6a0M1M6d84ygn5COQvDVwDdEHu4'
+        // unionId: 'o6a0M1M6d84ygn5COQvDVwDdEHu4'
       }
     })
   }

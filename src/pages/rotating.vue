@@ -73,23 +73,25 @@ export default {
      ...mapMutations(['setIsRotated', 'setUnionId']),
     //获取code码
     getCode() {
-      // let url = location.href
-      // //重定向
-      // if(url.indexOf('code') == -1){
-      //   location.href = 'https://derucci.net/web/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
-      // }
-      // let code = getQueryString('code')
-      // this.getUnionId(code)
-      this.getRotateInfo()
+      let url = location.href
+      //重定向
+      if(url.indexOf('code') == -1){
+        location.href = 'https://derucci.net/web/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
+      }
+      let code = getQueryString('code')
+      this.getUnionId(code)
+      // this.getRotateInfo()
     },
     //获取unionId
     getUnionId(code) {
       indexModel.getUnionId(code).then(res => {
-        if(res.unionId) {
-          this.setUnionId(res.unionId)
-          this.getRotateInfo(res.unionid)
-        }else {
-          alert('请不要重复刷新')
+        if(res.status == 1) {
+          if(res.unionid) {
+            this.setUnionId(res.unionId)
+            this.getRotateInfo(res.unionid)
+          } 
+        }else{
+          alert('已过期，请重新登录')
         }
       })
     },
@@ -101,6 +103,7 @@ export default {
           this.prize = res.data.filed1
           this.setIsRotated(false)
         }else {
+          this.setIsRotated(true)
           this.startStatus = true
         }
       })
