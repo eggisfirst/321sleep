@@ -5,19 +5,19 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    //321客户录入
+    // 321客户录入
     {
       path: '/collect',
       name: 'index',
       component: resolve => require(['@/pages/index'], resolve)
     },
-    //321拼团活动
+    // 321拼团活动
     {
       path: '/pintuan',
       name: 'wholesale',
       component: resolve => require(['@/pages/wholesale'], resolve)
     },
-    //321大转盘活动
+    // 321大转盘活动
     {
       path: '/',
       name: 'rotating',
