@@ -32,6 +32,11 @@ export default new Router({
       path: '/seckill',
       name: 'seckill',
       component: resolve => require(['@/pages/seckill'], resolve)
+    },
+    {
+      path: '/wxpay',
+      name: 'wxpay',
+      component: resolve => require(['@/pages/wxpay'], resolve)
     }
   ]
 })
