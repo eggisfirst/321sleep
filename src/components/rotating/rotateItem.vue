@@ -46,15 +46,21 @@ export default {
   },
   watch: {
     isRotated() {
+      this.judgeRotate()
+    }
+  },
+  created() {
+     this.judgeRotate()
+  },
+  methods: {
+    ...mapMutations(['setTypeCoupon']),
+    judgeRotate() {
       if(!this.isRotated) {
         this.hasChance = false
       }else {
         this.hasChance = true
       }
-    }
-  },
-  methods: {
-    ...mapMutations(['setTypeCoupon']),
+    },
     //开始抽奖
     startBtn() {
       if(this.key) {

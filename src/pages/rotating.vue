@@ -85,9 +85,9 @@ export default {
     //获取unionId
     getUnionId(code) {
       indexModel.getUnionId(code).then(res => {
-        if(res.status == 1) {
+        if(res.code == 0) {
           if(res.unionid) {
-            this.setUnionId(res.unionId)
+            this.setUnionId(res.unionid)
             this.getRotateInfo(res.unionid)
           } 
         }else{
@@ -98,6 +98,7 @@ export default {
     //验证有无抽奖
     getRotateInfo(unionid) {
       indexModel.rotateGetInfo(unionid).then(res => {
+        console.log(res)
         if(res.status == 1) {
           this.startStatus = false
           this.prize = res.data.filed1
