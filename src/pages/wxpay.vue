@@ -5,12 +5,13 @@
     <br/><br/>
     <button @click="test">alert</button>
     <br/>
-    <button @click="getWxpayData">get data</button>
+    <button @click="getPaySign">get data</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import md5 from "js-md5"
 export default {
   // components: { InputComp, Tips, RadioComp, SelectCity },
   data() {
@@ -28,7 +29,7 @@ export default {
     test() {
       alert(typeof WeixinJSBridge)
     },
-    wxpay() {
+    wxpay(params) {
       if (typeof WeixinJSBridge == 'undefined'){
         if( document.addEventListener ){
             document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady, false);
@@ -37,19 +38,21 @@ export default {
             document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady);
         }
       }else{
-        this.onBridgeReady();
+        this.onBridgeReady(params);
       }
     },
-    onBridgeReady() {
+    onBridgeReady(params) {
+      console.log('支付参数：', params)
       WeixinJSBridge.invoke(
-        'getBrandWCPayRequest', {
-          "appId": "wx877a7e37b0de0a87",     //公众号名称，由商户传入     
-          "timeStamp": Date.parse(new Date())/1000,         //时间戳，自1970年以来的秒数     
-          "nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串     
-          "package":"prepay_id=u802345jgfjsdfgsdg888",     
-          "signType":"MD5",         //微信签名方式：     
-          "paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名 
-        },
+        'getBrandWCPayRequest', params,
+        // {
+        //   "appId": "wx877a7e37b0de0a87",     //公众号名称，由商户传入     
+        //   "timeStamp": Date.parse(new Date())/1000,         //时间戳，自1970年以来的秒数     
+        //   "nonceStr": this.getNonceStr(32), //随机串
+        //   "package":"prepay_id=wx271449596982287b08a8a1af0929366468",     
+        //   "signType":"MD5",         //微信签名方式：
+        //   "paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名 
+        // },
         function(res){
           if(res.err_msg == "get_brand_wcpay_request:ok" ){
           // 使用以上方式判断前端返回,微信团队郑重提示：
@@ -67,59 +70,68 @@ export default {
       }
       return res
     },
-    getWxpayData() {
-      axios({
-        method: 'post',
-        url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
-        params: {
-          appid: 'wx877a7e37b0de0a87', // 公众账号ID
-          mch_id: '1311989501', // 商户号
-          // nonce_str: this.getNonceStr(32), // 随机字符串
-          nonce_str: 'wtli3g4hwhu7tdftvc3q6b79i1jflhwe',
-          sign: '	5BD19D3A610CAF93C01DC05462A42408', // 签名
-          body: '慕思芯逸蚕丝薄被', // 商品描述
-          out_trade_no: '2019022509050043kdc1469f6416ih9m', // 商户订单号
-          total_fee: 1, // 总金额
-          spbill_create_ip: '223.104.63.246', // 终端iP
-          notify_url: 'https://derucci.net/api/public/v1/getProvince', // 通知地址
-          trade_type: 'MWEB', // 交易类型
-          scene_info: `{"h5_info":{"type": "h5_info","wap_url": "https://derucci.net/web/321/#/wxpay","wap_name": "321世界睡眠日"}}`
+    getPaySign() {
+      this.getWxpayData().then((res) => {
+        console.log('获取的参数：：', res)
+        this.wxpay(res)
+        let temp = this.objKeySort(res)
+        delete temp['paySign']
+        console.log('删除属性后：', temp)
+        let signStr = (str = '') => {
+          for (let key in temp) {
+            str += `${key}=${temp[key]}&`
+          }
+          return str
         }
-      }).then((res) => {
-        alert('successa')
-      }).catch((error) => {
-        alert('errorsa')
+        let signStrTemp = `${signStr()}&key=dawma9c9taqsftgk3vfhbm4ul5m8sbk6`
+        let paySign = md5(signStrTemp).toUpperCase()
+        console.log('paysign:', paySign)
+        // let params = Object.assign(temp, {paySign: paySign})
+        // this.wxpay(params)
+      })
+    },
+    // 对象根据属性排序
+    objKeySort(obj) {
+      var newkey = Object.keys(obj).sort();
+  　　//先用Object内置类的keys方法获取要排序对象的属性名，再利用Array原型上的sort方法对获取的属性名进行排序，newkey是一个数组
+      var newObj = {};//创建一个新的对象，用于存放排好序的键值对
+      for (var i = 0; i < newkey.length; i++) {//遍历newkey数组
+        newObj[newkey[i]] = obj[newkey[i]];//向新创建的对象中按照排好的顺序依次增加键值对
+      }
+      return newObj;//返回排好序的新对象
+    },
+    getWxpayData() {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'post',
+          url: 'https://derucci.net/wx/pushOrder',
+          params: {
+            tradeType: 'JSAPI',
+            body: '321定金',
+            detail: '321定金',
+            amount: 0.1,
+            sceneInfo: {
+              "h5_info": {
+                "type":"Wap",
+                "wap_url": "https://derucci.net",
+                "wap_name": "321定金"
+              }
+            },
+            ip: '223.104.63.246',
+            callBack: 'https://derucci.net/callback/wx/pay',
+            openId: 'ong6Cw4ONz3WDF-94R89i5qE6DLY'
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            resolve(res.data)
+          } else {
+            reject('下单失败！')
+          }
+        }).catch((error) => {
+          reject('下单失败！')
+        })
       })
     }
-
-    // get_client_ip() {
-    //   axios({
-    //     method: 'get',
-    //     url: 'http://pv.sohu.com/cityjson?ie=utf-8'
-    //   }).then((res) => {
-    //     console.log('获取用户IP成功', res)
-    //   }).catch((error) => {
-
-    //   })
-    // }
-
-//             method: 'post',
-//         url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
-//         params: {
-//           appid: 'wx877a7e37b0de0a87', // 公众账号ID
-//           body: '慕思芯逸蚕丝薄被', // 商品描述
-//           mch_id: '1311989501', // 商户号
-//           nonce_str: this.getNonceStr(32), // 随机字符串
-//           notify_url: 'https://derucci.net/api/public/v1/getProvince', // 通知地址
-//           out_trade_no: '2019022509050043kdc1469f6416ih9m', // 商户订单号
-//           scene_info: `{"h5_info":{"type": "h5_info","wap_url": "https://derucci.net/web/321/#/wxpay","wap_name": "321世界睡眠日"}}`
-//           sign: , // 签名
-//           spbill_create_ip: '223.104.63.246', // 终端iP
-//           total_fee: 1, // 总金
-//           trade_type: 'MWEB', // 交易类型
-// stringA: appid=wx877a7e37b0de0a87&body=慕思芯逸蚕丝薄被&mch_id=1311989501&nonce_str=wtli3g4hwhu7tdftvc3q6b79i1jflhwe&notify_url=https://derucci.net/api/public/v1/getProvince&out_trade_no=2019022509050043kdc1469f6416ih9m&scene_info={"h5_info":{"type": "h5_info","wap_url": "https://derucci.net/web/321/#/wxpay","wap_name": "321世界睡眠日"}}&spbill_create_ip=223.104.63.246&total_fee=1&trade_type=MWEB
-// stringSignTemp=stringA+"&key=192006250b4c09247ec02edce69f6a2d"
-// appid=wx877a7e37b0de0a87&body=慕思芯逸蚕丝薄被&mch_id=1311989501&nonce_str=wtli3g4hwhu7tdftvc3q6b79i1jflhwe&notify_url=https://derucci.net/api/public/v1/getProvince&out_trade_no=2019022509050043kdc1469f6416ih9m&scene_info={"h5_info":{"type": "h5_info","wap_url": "https://derucci.net/web/321/#/wxpay","wap_name": "321世界睡眠日"}}&spbill_create_ip=223.104.63.246&total_fee=1&trade_type=MWEB&key=dawma9c9taqsftgk3vfhbm4ul5m8sbk6
   }
 }
 </script>
