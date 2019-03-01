@@ -16,8 +16,12 @@ export default {
   // components: { InputComp, Tips, RadioComp, SelectCity },
   data() {
     return {
-      
+      code: ''
     }
+  },
+  created() {
+    this.getCode()
+    console.log('code:', this.code)
   },
   mounted() {
     let date = new Date()
@@ -109,7 +113,7 @@ export default {
             tradeType: 'JSAPI',
             body: '321定金',
             detail: '321定金',
-            amount: 0.1,
+            amount: 0.01,
             sceneInfo: {
               "h5_info": {
                 "type":"Wap",
@@ -117,8 +121,9 @@ export default {
                 "wap_name": "321定金"
               }
             },
-            ip: '223.104.63.246',
-            callBack: 'https://derucci.net/callback/wx/pay',
+            ip: '120.197.197.77',
+            // ip: '223.104.63.246',
+            callBack: 'https://derucci.net/wx/callback/pay',
             openId: 'ong6Cw4ONz3WDF-94R89i5qE6DLY'
           }
         }).then((res) => {
@@ -131,6 +136,16 @@ export default {
           reject('下单失败！')
         })
       })
+    },
+    getCode() {
+      console.log(123)
+      let url = location.href
+      console.log(url)
+      //重定向
+      if(url.indexOf('code') === -1) {
+        location.href = 'https://derucci.net/web/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
+      }
+      // this.code = getQueryString('code')
     }
   }
 }
