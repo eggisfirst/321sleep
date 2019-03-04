@@ -101,6 +101,7 @@ export default {
       this.stompClient.connect({}, () => {
         this.stompClient.subscribe('/topic/groupBooking/count', (res) => {
           if(res.body) {
+            console.log('resbody',res.body)
             this.countNum(res.body)
           }
         });
@@ -110,12 +111,14 @@ export default {
     countNum(joinNum) {
       var tempNum = countNumber()
       if(tempNum) {
-        this.num = tempNum
-        localStorage.setItem("num",tempNum)
+         if(joinNum < tempNum) {
+          this.num = tempNum
+        }else {
+          this.num = joinNum
+        }
       }else {
-        let n = parseInt(localStorage.getItem("num")) 
-        if(joinNum < n) {
-          this.num = n
+        if(joinNum < 1000) {
+          this.num = 1020 
         }else {
           this.num = joinNum
         }

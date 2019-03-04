@@ -4,7 +4,7 @@
       <h1>中奖啦</h1>
       <p>恭喜您获得价值{{ prize }}元现金券一张，请根据中奖记</p>
       <p>录到门店进行兑换实体现金券及使用。</p>
-      <img :src="`./static/img/${prize}.png`" alt="">
+      <img :src="`./static/img/${prize}.jpeg`" alt="">
       <!-- <img :src="`../../assets/images/${prize}.png`" alt=""> -->
     </div>
     <div class="close" >
