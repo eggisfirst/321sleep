@@ -75,7 +75,7 @@ let countNumber = () => {
   let num  
   console.log('time',day,hour)
   if(year == 2019 && mouth == 3 && day < 25) {
-    if(hour >= 9 && hour < 15) {
+    if(hour >= 0 && hour < 15) {
       num = 14*(day*3 - 2)
       return num
     }else if(hour >= 15 && hour < 21) {
@@ -84,8 +84,6 @@ let countNumber = () => {
     }else if(hour >= 21) {
       num = 14*(day*3)
       return num
-    }else{
-      return false
     }
   }else {
     return false
