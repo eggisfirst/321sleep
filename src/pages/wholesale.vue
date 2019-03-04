@@ -101,6 +101,7 @@ export default {
       this.stompClient.connect({}, () => {
         this.stompClient.subscribe('/topic/groupBooking/count', (res) => {
           if(res.body) {
+            console.log('resbody',res.body)
             this.countNum(res.body)
           }
         });
