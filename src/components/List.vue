@@ -7,7 +7,7 @@
           <div>奖品</div>
         </div>
         <div class="td" v-for="(item,index) in list.winList" :key="index">
-          <div>{{item.username.substring(0,1)+"**"}}</div>
+          <div>{{item.username.substring(0,1)+"*"+item.username.substring(2)}}</div>
           <div>{{item.phone.substring(0,3)+"****"+item.phone.substring(7)}}</div>
           <div>{{item.prizeName}}</div>
         </div>
@@ -18,7 +18,7 @@
           <div>手机号</div>
         </div>
         <div class="td" v-for="(item,index) in list.winList" :key="index">
-          <div>{{item.username.substring(0,1)+"**"}}</div>
+          <div>{{item.username.substring(0,1)+"*"+item.username.substring(2)}}</div>
           <div>{{item.phone.substring(0,3)+"****"+item.phone.substring(7)}}</div>
         </div>
        
