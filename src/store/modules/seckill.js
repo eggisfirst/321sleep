@@ -62,7 +62,6 @@ const mutations = {
     state.list.diff.winList = array
     state.list.diff.draw = false
     state.list.diff.seckill = true
-
   }
 }
 
