@@ -118,7 +118,7 @@ export default {
         }
       }else {
         if(joinNum < 1000) {
-          this.num = 1020 
+          this.num = 1030 
         }else {
           this.num = joinNum
         }

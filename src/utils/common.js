@@ -72,22 +72,49 @@ let countNumber = () => {
   let mouth = new Date().getMonth() + 1
   let day = new Date().getDate()
   let hour = new Date().getHours()
-  let num  
+  // let num  
   console.log('time',day,hour)
-  if(year == 2019 && mouth == 3 && day < 25) {
-    if(hour >= 0 && hour < 15) {
-      num = 14*(day*3 - 2)
+  // if(year == 2019 && mouth == 3 && day < 25) {
+  //   if(hour >= 0 && hour < 15) {
+  //     num = 14*(day*3 - 2)
+  //     return num
+  //   }else if(hour >= 15 && hour < 21) {
+  //     num = 14*(day*3 -1)
+  //     return num
+  //   }else if(hour >= 21) {
+  //     num = 14*(day*3)
+  //     return num
+  //   }
+  // }else {
+  //   return false
+  // }
+  let num
+  if(year == 2019 && mouth == 3 && day < 24) {
+    if(hour >=0 && hour < 15) {
+      num = 860 + [(day - 21)*3]* 18
       return num
-    }else if(hour >= 15 && hour < 21) {
-      num = 14*(day*3 -1)
-      return num
+    }else if(hour >=15 && hour < 21) {
+      num = 860 + [(day - 21)*3 + 1]*18
+      return num 
     }else if(hour >= 21) {
-      num = 14*(day*3)
-      return num
+      num = 860 + [(day - 21)*3 + 2]*18
+      return num 
+    }
+  }else if (year == 2019 && mouth == 3 && day == 24) {
+    if(hour >=0 && hour < 15) {
+      num = 1010
+      return num 
+    }else if(hour >=15 && hour < 21) {
+      num = 1017
+      return num 
+    }else if(hour >= 21) {
+      num = 1030
+      return num 
     }
   }else {
     return false
   }
+
   
 }
 
