@@ -37,6 +37,11 @@ export default new Router({
       path: '/wxpay',
       name: 'wxpay',
       component: resolve => require(['@/pages/wxpay'], resolve)
+    },
+    {
+      path: '/H5pay',
+      name: 'H5pay',
+      component: resolve => require(['@/pages/H5pay'], resolve)
     }
   ]
 })

@@ -65,6 +65,7 @@ export default {
            console.log(res.data);
           if(res.data.length>0){
             this.$store.commit('lottery/setWinList',res.data)
+            
           }else{
             this.$store.commit('lottery/showNone')
           }
