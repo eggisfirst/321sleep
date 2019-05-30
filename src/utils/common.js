@@ -1,5 +1,5 @@
 import axios from 'axios' 
- export default class Common {
+export default class Common {
   // 参数加密
   getSign(arr) {
     let str = ''
@@ -52,17 +52,27 @@ import axios from 'axios'
   export {isNull}
 //判断是2019/3/24号之前
 let checkTime = () => {
-  let year = new Date().getFullYear()
-  let mouth = new Date().getMonth() + 1
-  let day = new Date().getDate()
-  // console.log(year,mouth,day,1111)
-  if(year == 2019 && mouth == 3 && day < 25) {
+  let beginTime = new Date('2019/06/08 00:00:00').getTime()
+  let endTime = new Date('2019/06/23 18:00:00').getTime()
+  let today = new Date().getTime()
+  if( today >= beginTime && today < endTime ) {
     return 'begin'
-  }else if(year == 2019 && mouth < 3){
+  }else if(today < beginTime) {
     return 'before'
   }else {
     return false
   }
+  // let year = new Date().getFullYear()
+  // let mouth = new Date().getMonth() + 1
+  // let day = new Date().getDate()
+  // console.log(year,mouth,day,1111)
+  // if(year == 2019 && mouth == 3 && day < 25) {
+  //   return 'begin'
+  // }else if(year == 2019 && mouth < 3){
+  //   return 'before'
+  // }else {
+  //   return false
+  // }
 }
 export {checkTime}
 

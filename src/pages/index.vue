@@ -76,16 +76,17 @@ export default {
   methods: {
     //提交表单
     submitData() {
-      this.testPhoneVal()
-      // let isEndTime = checkTime()
-      // if(isEndTime == 'before') {
-      //   // alert('该活动尚未开始')
-      //   this.testPhoneVal()
-      // }else if(isEndTime == 'begin'){
-      //   this.testPhoneVal()
-      // }else{
-      //   alert('该活动已结束')
-      // }
+      // this.testPhoneVal()
+      let isEndTime = checkTime()
+      if(isEndTime == 'before') {
+        alert('该活动尚未开始')
+        // this.testPhoneVal()
+      }else if(isEndTime == 'begin'){
+        console.log('begin')
+        this.testPhoneVal()
+      }else{
+        alert('该活动已结束')
+      }
     },
     saveData(obj) {
       this.key = false
