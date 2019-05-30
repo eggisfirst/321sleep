@@ -89,6 +89,7 @@ export default {
   },
   mounted() {
     this.getFreeMan()
+    this.getPrizes()
     this.time()
     this.connection()
   },
@@ -147,8 +148,9 @@ export default {
       let day = new Date().getDate()
       let mouth = new Date().getMonth() + 1
       let hour = new Date().getHours()
-      if(year == 2019 && mouth == 4 && day == 1 && hour == 11) {
-        this.getPrizes()
+      //转成时间戳比较
+      if(year == 2019 && mouth >= 4 && day == 1 && hour == 11) {
+        // this.getPrizes()
       }else {
         return 
       }
