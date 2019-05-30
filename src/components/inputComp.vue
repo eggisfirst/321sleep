@@ -31,14 +31,14 @@ export default {
   .input {
     font-size:4.26vw;
     height: 13.3vw;
-    border-bottom: 1px solid #19589a;
+    border-bottom: 1px solid #f7fbfd;
     width: 100%;
     background:none;  
 	  outline:none;  
-    color:  #68b9fe
+    color:  #f7fbfd
   }
 }
 .input::-webkit-input-placeholder{
-  color: #68b9fe;
+  color: #f7fbfd;
 }
 </style>

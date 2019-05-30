@@ -11,22 +11,27 @@ class IndexModel extends Request {
   // }
   getPro () {
     return this.getData({
-      url: 'https://agency.derucci.com/v1/api/public/province'
+      url: 'https://derucci.net/api/public/v1/region',
+      params: {
+        type: 'PROVINCE'
+      }
     })
   }
   getCity (code) {
     return this.getData({
-      url: 'https://agency.derucci.com/v1/api/public/city',
+      url: 'https://derucci.net/api/public/v1/region',
       params: {
-        province: code
+        parentCode: code,
+        type: 'CITY'
       }
     })
   }
   getArea (code) {
     return this.getData({
-      url: 'https://agency.derucci.com/v1/api/public/area',
+      url: 'https://derucci.net/api/public/v1/region',
       params: {
-        city: code
+        parentCode: code,
+        type: 'AREA'
       }
     })
   }
@@ -35,14 +40,14 @@ class IndexModel extends Request {
     return this.getPostData({
       url: this.baseUrl + '/api/lotteryuser/v1/save',
       data: {
-        prizeType: obj.prizeType,
+        prizeType: '618',
         username: obj.username,
         phone: obj.phone,
         province: obj.province,
         city: obj.city,
         shopName: obj.shopName,
-        dealerName: obj.dealerName,
-        field1: obj.field1 ? obj.field1 : ''
+        dealerName: obj.dealerName
+        // field1: obj.field1 ? obj.field1 : ''
       }
     })
   }

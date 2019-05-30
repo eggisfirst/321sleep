@@ -3,8 +3,8 @@
     <div class="banner"></div>
     <div class="content">
       <div class="title">
-        <p>客户信息录入</p>
-        <img src="../assets/images/line.png" alt="">
+        <p>拼团客户录入</p>
+        <!-- <img src="../assets/images/line.png" alt=""> -->
       </div>
       <div class="from_data">
         <p>{{ Title }}</p>
@@ -19,14 +19,14 @@
               :maxLength='item.maxLength'
               :myType='item.type'/>
           </li>
-          <li class="raidoCom" >
+          <!-- <li class="raidoCom" >
             <radio-comp v-model='radioVal' @change="changeVal"/>
-          </li>
+          </li> -->
         </ul>
         <button class="btn" @click="submitData"></button>
       </div>
     </div>
-    <div class="footer"></div>
+    <!-- <div class="footer"></div> -->
     <div class="showTips" v-show="isShowTips">
       <tips :tipsText='tipsText' :tipsPic='tipsPic'/>
     </div>
@@ -56,12 +56,12 @@ export default {
         {name: '请输入客户姓名', type: 'text', maxLength:'20'},
         {name: '请输入客户手机', type: 'number', maxLength:'11'}
       ],
-      Title:'',
-      title: [
-        '请录入已到店支付预款2000元的客户，与客户核实后录入，避免录入错误。',
-        '请录入参与抽奖和秒杀活动的客户信息。',
-        '请录入参与秒杀活动的客户信息。'
-      ],
+      // title: [
+      //   '请录入已到店支付预款2000元的客户，与客户核实后录入，避免录入错误。',
+      //   '请录入参与抽奖和秒杀活动的客户信息。',
+      //   '请录入参与秒杀活动的客户信息。'
+      // ],
+      Title: '请录入参与抽奖的客户信息',
       list:[],
       radioVal:'',
       tipsText: '录入成功',
@@ -76,15 +76,16 @@ export default {
   methods: {
     //提交表单
     submitData() {
-      let isEndTime = checkTime()
-      if(isEndTime == 'before') {
-        // alert('该活动尚未开始')
-        this.testPhoneVal()
-      }else if(isEndTime == 'begin'){
-        this.testPhoneVal()
-      }else{
-        alert('该活动已结束')
-      }
+      this.testPhoneVal()
+      // let isEndTime = checkTime()
+      // if(isEndTime == 'before') {
+      //   // alert('该活动尚未开始')
+      //   this.testPhoneVal()
+      // }else if(isEndTime == 'begin'){
+      //   this.testPhoneVal()
+      // }else{
+      //   alert('该活动已结束')
+      // }
     },
     saveData(obj) {
       this.key = false
@@ -119,7 +120,7 @@ export default {
         this.obj.username = this.list[2]
         let arr = Object.keys(this.obj);
         let len = arr.length;
-        if(len >= 7) {
+        if(len >= 6) {
           if(this.key) {
             this.saveData(this.obj)
           }
@@ -150,11 +151,7 @@ export default {
         }
       }
       if(time == 4) {
-        if(this.radioVal === ''){
-          this.showWarnTips('请选择订单类型')
-        }else {
-          this.checkAreaData()
-        }
+        this.checkAreaData()
       }
     },
     //输入框没填写的错误提示
@@ -216,9 +213,9 @@ export default {
 .index {
   width: 100vw;
   min-height: 100vh;
-  background-color: rgba(6, 23, 41, 1);
+  background-color: rgba(108, 165, 195, 1);
   .banner {
-    background: url(../assets/images/banner.png) no-repeat center;
+    background: url(../assets/images/618banner.png) no-repeat center;
     background-size: 100% 100%;
     width: 100%;
     height: 50vw;
@@ -226,20 +223,22 @@ export default {
   .content {
     width: 90.66vw;
     margin: 0 auto;
+    background-color: rgba(108, 165, 195, 1);
     .title {
       margin-top: 2.8vw;
       text-align: center;
+      margin-bottom: 3.6vw;
       p {
         font-size: 4.8vw;
         font-weight:bold;
-        color: rgba(255, 255, 255, 1);
         line-height:6.4vw;
-        text-shadow:0 0.4vw 0.3vw rgba(26,39,76,0.28);
-        -webkit-text-stroke:1px undefined;
-        text-stroke:1px undefined;
-        background:linear-gradient(0deg,rgba(101,177,255,1) 0%, rgba(236,245,254,1) 34.5703125%, rgba(101,177,255,1) 67.8955078125%, rgba(239,245,252,1) 100%);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
+        color: #f7fbfd;
+        // text-shadow:0 0.4vw 0.3vw rgba(26,39,76,0.28);
+        // -webkit-text-stroke:1px undefined;
+        // text-stroke:1px undefined;
+        // background:linear-gradient(0deg,rgba(101,177,255,1) 0%, rgba(236,245,254,1) 34.5703125%, rgba(101,177,255,1) 67.8955078125%, rgba(239,245,252,1) 100%);
+        // -webkit-background-clip:text;
+        // -webkit-text-fill-color:transparent;
       }
       img {
         width: 36.26vw;
@@ -250,12 +249,13 @@ export default {
       z-index: 999;
       position: relative;
       padding: 4.26vw 5.3vw;
-      height:90vw;
-      background:rgba(17,63,111,0.5);
+      height:80vw;
+      background:rgba(195,220,232,0.5);
       border-radius:3.2vw;
       p {
         font-size: 3.73vw;
-        color:rgba(142,221,255,1);
+        // color:rgba(142,221,255,1);
+        color: #f7fbfd;
         line-height: 6.4vw;
       }
       .selectCity {
@@ -263,11 +263,11 @@ export default {
         align-items: center;
         font-size:4.26vw;
         height: 13.3vw;
-        border-bottom: 1px solid #19589a;
+        border-bottom: 1px solid #f7fbfd;
         width: 100%;
         background:none;  
         outline:none;  
-        color:  #68b9fe;
+        color:  #f7fbfd;
         justify-content: space-between
       }
       .raidoCom {
@@ -280,6 +280,7 @@ export default {
         height: 2.8vw;
       }
       .btn {
+        opacity: 0.8;
         background: url(../assets/images/btn.png) no-repeat center;
         background-size: 100% 100%;
         width: 46.93vw;

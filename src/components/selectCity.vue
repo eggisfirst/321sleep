@@ -206,7 +206,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     .pullDown {
-      background: url(../assets/images/pulldown.png) no-repeat center;
+      background: url(../assets/images/618pulldown.png) no-repeat center;
       background-size: 100% 100%;
       width: 2.8vw;
       height: 2.8vw;
