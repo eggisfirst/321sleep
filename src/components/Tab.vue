@@ -52,20 +52,19 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content:space-between;
-  margin:.4rem auto 0;
+  margin:.11rem auto 0;
   li{
     display: flex;
     width:.3rem;
     height:.3rem;
     align-items: center;
     justify-content: center;
-    background:rgba(46,130,201,.4);
+    background:rgba(8,50,88,.4);
     border-radius:50%;
     transition: width .2s linear;
     overflow: hidden;
     img{
       width:.13rem;
-      height:.13rem;
       display: block;
     }
     span{
@@ -75,7 +74,7 @@ export default {
   }
   li.on{
     width:.84rem;
-    background: #2E82C9;
+    background: #083258;
     
     border-radius:.15rem;
     img{
@@ -83,6 +82,7 @@ export default {
     }
     span{
       font-size: .15rem;
+      white-space: nowrap;
     }
   }
   

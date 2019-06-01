@@ -1,14 +1,10 @@
 <template>
     <div class="rule">
       <div class="lottery_rule" v-if="list.drawRule">
-        <p>1、参与方式：3月1日至活动当天消费满20000元；</p>
-        <p>2、中奖名单分4个时段抽取，抽取安排如下：</p>
-        <div><img src="../assets/images/table.png" alt=""></div>
-        <p>3、查询方式：查询慕思官方微信服务号（微信号：derucci02），亦可在公众号内检索“321活动”查询中奖情况；</p>
-        <p>4、中奖客户：专门的客服会与中奖客户联系，核实信息后寄出产品；</p>
-        <p>5、放弃奖品不做任何补偿，且获奖奖品不可替换，不可作为其他产品的抵扣款；</p>
-        <p>6、如有疑问可以拨打客服热线：400-777-0077；</p>
-        <p>7、活动最终解释权归慕思寝室用品有限公司所有。</p>
+        <h1>畅享大抽奖</h1>
+        <p>1、实付金额满10000元，可抽奖，每多付10000元，增加1个坑位，中奖机率增加，占的坑位越多，中奖概率越大。</p>
+        <p>2、抽奖时间: 6月23日（周日）20:00 ，一次性抽取全部的222个名额；</p>
+        <p>3、消费者可在慕思寝具服务号（微信号：derucci02），输入关键词：“618抽奖”关键词，进行中奖情况查询。</p>
       </div>
       <div class="miaosha_rule" v-else>
         <p>1、参与方式(满足其中一种方式即可）：</p>
@@ -50,14 +46,23 @@ export default {
 <style lang="scss" scoped>
 .rule{
   font-size: .12rem;
-  color:#2E82C9;
-  margin:.15rem auto;
+  color:#083258;
+  margin:.16rem auto;
   
   .lottery_rule{
     width:89.33vw;
     margin:0 auto;
+    font-size: .15rem;
+    h1{
+      font-size: .18rem;
+      line-height: .3rem;
+      color:#083258;
+      font-weight: bold;
+    }
     p{
-      line-height: .22rem;
+      line-height: .3rem;
+      word-break: break-all;
+      text-align:justify;
     }
     img{
       width:100%;
