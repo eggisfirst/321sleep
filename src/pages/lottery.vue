@@ -30,7 +30,7 @@ export default {
     Tab,
   },
   created() {
-    let date='2019-06-18';
+    let date='2019-06-23 20';
     let type='618';
     indexModel.getPrizes(date,type).then(res=>{
       console.log(res.data);
