@@ -3,7 +3,7 @@
     <div class="banner"></div>
     <div class="content">
       <div class="title">
-        <p>拼团客户录入</p>
+        <p>抽奖客户录入</p>
         <!-- <img src="../assets/images/line.png" alt=""> -->
       </div>
       <div class="from_data">
@@ -54,6 +54,7 @@ export default {
         {name: '请输入门店名称', type: 'text', maxLength:'20'},
         {name: '请输入经销商姓名', type: 'text', maxLength:'20'},
         {name: '请输入客户姓名', type: 'text', maxLength:'20'},
+        {name: '请输入订单金额', type: 'number', maxLength:'6'},
         {name: '请输入客户手机', type: 'number', maxLength:'11'}
       ],
       // title: [
@@ -121,7 +122,7 @@ export default {
         this.obj.username = this.list[2]
         let arr = Object.keys(this.obj);
         let len = arr.length;
-        if(len >= 6) {
+        if(len >= 7) {
           if(this.key) {
             this.saveData(this.obj)
           }
@@ -132,12 +133,24 @@ export default {
     },
     //验证手机号码
     testPhoneVal() {
-      let phone = this.list[3]
+      let phone = this.list[4]
       if(testPhone(phone)) {
         this.obj.phone = phone
-        this.testInputData()
+        this.testMoney()
       }else {
         this.showWarnTips('请输入正确手机号')
+      }
+    },
+    //判断输入金额
+    testMoney() {
+      let temp = this.list[3]
+      if(!temp) {
+        this.showWarnTips('请输入订单金额')
+      }else if(temp < 10000) {
+        this.showWarnTips('订单金额不小于10000')
+      }else {
+        this.obj.field1 = this.list[3]
+        this.testInputData()
       }
     },
     //判断哪个输入框没填
@@ -145,13 +158,13 @@ export default {
       let len = this.list.length
       let time = 0
       for(var i = 0; i < len; i++) {
-        if(this.list[i] == undefined || isNull(this.list[i]) == false) {
+        if(!this.list[i] || isNull(this.list[i]) == false) {
           this.checkInputData(i)
         }else {
           time += 1
         }
       }
-      if(time == 4) {
+      if(time == 5) {
         this.checkAreaData()
       }
     },
@@ -213,8 +226,9 @@ export default {
 <style lang="scss" scoped>
 .index {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 105vh;
   background-color: rgba(108, 165, 195, 1);
+  overflow: hidden;
   .banner {
     background: url(../assets/images/618banner.png) no-repeat center;
     background-size: 100% 100%;
@@ -250,7 +264,7 @@ export default {
       z-index: 999;
       position: relative;
       padding: 4.26vw 5.3vw;
-      height:80vw;
+      height:88vw;
       background:rgba(195,220,232,0.5);
       border-radius:3.2vw;
       p {

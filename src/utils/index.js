@@ -46,8 +46,8 @@ class IndexModel extends Request {
         province: obj.province,
         city: obj.city,
         shopName: obj.shopName,
-        dealerName: obj.dealerName
-        // field1: obj.field1 ? obj.field1 : ''
+        dealerName: obj.dealerName,
+        field1: obj.field1 
       }
     })
   }
