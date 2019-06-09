@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="banner"></div>
-    <time-bar :list="list"/>
+    <!-- <time-bar :list="list"/> -->
     <tab :list="link"/>
     <div class="footer"></div>
   </div>
@@ -30,8 +30,8 @@ export default {
     Tab,
   },
   created() {
-    let date='2019-03-09 15';
-    let type='321-2';
+    let date='2019-06-23 20';
+    let type='618';
     indexModel.getPrizes(date,type).then(res=>{
       console.log(res.data);
       if(res.data.length==0){
@@ -53,14 +53,14 @@ export default {
   height: 100vh;
   position:relative;
   overflow-y:scroll;
-  background-color: rgba(6, 23, 41, 1);
+  background-color: #BFEDFF;
   .banner {
-    background: url(../assets/images/banner_cj.png) no-repeat center;
+    background: url(../assets/images/banner618_cj.png) no-repeat center;
     background-size: 100% 100%;
     width: 100%;
-    height: 50vw;
+    height: 50.133vw;
   }
-  .footer {
+  /* .footer {
     background: url(../assets/images/footer.png) no-repeat center;
     background-size: 100% 100%;
     width: 100%;
@@ -69,7 +69,7 @@ export default {
     bottom: 0;
     left: 0;
     pointer-events:none;
-  }
+  } */
 }
 
 </style>

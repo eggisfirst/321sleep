@@ -1,27 +1,7 @@
 <template>
     <div class="award">
       <div class="lottery_award" v-if="list.drawAward">
-        <div class="item">
-            <img src="../assets/images/phone.png" alt="">
-            <div>
-              <h2>华为 Mate 20 Pro</h2>
-              <h1>12名</h1>
-            </div>
-        </div>
-        <div class="item">
-            <img src="../assets/images/pillow.png" alt="">
-            <div>
-              <h2>凝胶枕</h2>
-              <h1>24名</h1>
-            </div>
-        </div>
-        <div class="item">
-            <img src="../assets/images/quilt.png" alt="">
-            <div>
-              <h2>芯逸桑蚕丝薄被</h2>
-              <h1>40名</h1>
-            </div>
-        </div>
+        <img src="../assets/images/618prize.png" alt="" class="prize">
       </div>
       <div class="miaosha_award"  v-else>
         <div class="item">
@@ -60,11 +40,14 @@ export default {
 
 <style lang="scss" scoped>
 .award{
-  width:92vw;
+  width:93.333vw;
   margin:.15rem auto 0;
   .lottery_award{
     width:100%;
     margin-top:.275rem;
+    .prize{
+      width:3.5rem;
+    }
     .item{
       width:100%;
       height:28vw;

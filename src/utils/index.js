@@ -35,7 +35,7 @@ class IndexModel extends Request {
       }
     })
   }
-  //客户录入保存信息
+  // 客户录入保存信息
   saveData (obj) {
     return this.getPostData({
       url: this.baseUrl + '/api/lotteryuser/v1/save',
@@ -51,7 +51,7 @@ class IndexModel extends Request {
       }
     })
   }
-  //4/1抽奖
+  // 4/1抽奖
   getPrizes (date, type) {
     return this.getData({
       url: this.baseUrl + '/api/lotteryuser/v1/getPrizes',
@@ -61,19 +61,19 @@ class IndexModel extends Request {
       }
     })
   }
-  //获取用户unionid
-  getUnionId(code) {
+  // 获取用户unionid
+  getUnionId (code) {
     return this.getData({
       url: this.baseUrl + '/api/public/v1/getWxAccessToken',
       params: {
-        code:code,
-        appId:'wx877a7e37b0de0a87',
-        timestamp:getTimestamp(), 
+        code: code,
+        appId: 'wx877a7e37b0de0a87',
+        timestamp: getTimestamp()
       }
     })
   }
-  //转盘抽奖后保存信息
-  rotateSaveInfo(unionId, type) {
+  // 转盘抽奖后保存信息
+  rotateSaveInfo (unionId, type) {
     return this.getPostData({
       url: this.testUrl + '/api/lotteryuser/v1/saveturntable',
       data: {
@@ -84,8 +84,8 @@ class IndexModel extends Request {
       }
     })
   }
-  //获取用户信息
-  rotateGetInfo(unionId) {
+  // 获取用户信息
+  rotateGetInfo (unionId) {
     return this.getData({
       url: this.testUrl + '/api/lotteryuser/v1/turntable',
       params: {
