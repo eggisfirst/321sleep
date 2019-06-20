@@ -47,7 +47,7 @@ class IndexModel extends Request {
         city: obj.city,
         shopName: obj.shopName,
         dealerName: obj.dealerName,
-        field1: obj.field1 
+        amount: obj.amount 
       }
     })
   }

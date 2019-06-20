@@ -149,7 +149,7 @@ export default {
       }else if(temp < 10000) {
         this.showWarnTips('订单金额不小于10000')
       }else {
-        this.obj.field1 = this.list[3]
+        this.obj.amount = this.list[3]
         this.testInputData()
       }
     },
