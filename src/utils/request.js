@@ -19,9 +19,9 @@ class Request {
       axios({
         method: 'post',
         url: url,
-        params: data
+        params: data,
         // headers: {
-        //   'Content-Type': 'application/x-www-form-urlencoded'
+        //   'Content-Type': 'application/json',
         // }
       }).then(res => {
         resolve(res)

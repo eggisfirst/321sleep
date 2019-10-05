@@ -95,6 +95,15 @@ class IndexModel extends Request {
       }
     })
   }
+
+
+  //新零售
+  activitySignUp(obj) {
+    return this.getPostData({
+      url: this.testUrl + '/v1/api/useraddress/activitySignUp',
+      data: obj
+    })
+  }
 }
 
 export { IndexModel }

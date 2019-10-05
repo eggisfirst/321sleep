@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'mint-ui/lib/style.min.css'
+import base from './Global'
+Vue.use(base)
+
 // import '../mock/index'
 Vue.config.productionTip = false;
 (function (doc, win) {

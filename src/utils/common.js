@@ -162,3 +162,30 @@ let nameDisplay = (name) => {
  }
 
  export {nameDisplay}
+
+
+//检测url有没有#并去除#
+const testUrl =  (name) => {
+  if (name.indexOf("#") != -1) {
+    name = name.substring(name.indexOf(""), name.indexOf('#/')) + name.substring(name.indexOf("#/") + 2)
+    return name
+  }
+  return name
+}
+
+export {testUrl}
+
+   //获取url参数
+  const GetQueryString = (name, url) => {
+    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    url = url.substr(url.indexOf('?') + 1)
+    let r = url.match(reg);  //获取url中"?"符后的字符串并正则匹配
+    let context = "";
+    if (r != null)
+      context = r[2];
+    reg = null;
+    r = null;
+    return context == null || context == "" || context == "undefined" ? "" : context;
+  }
+
+  export {GetQueryString}

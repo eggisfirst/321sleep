@@ -42,6 +42,11 @@ export default new Router({
       path: '/H5pay',
       name: 'H5pay',
       component: resolve => require(['@/pages/H5pay'], resolve)
+    },
+    {
+      path: '/newSell',
+      name: 'newSell',
+      component: () => import('@/pages/newSell')
     }
   ]
 })
