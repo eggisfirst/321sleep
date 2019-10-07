@@ -177,15 +177,8 @@ export {testUrl}
 
    //获取url参数
   const GetQueryString = (name, url) => {
-    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    url = url.substr(url.indexOf('?') + 1)
-    let r = url.match(reg);  //获取url中"?"符后的字符串并正则匹配
-    let context = "";
-    if (r != null)
-      context = r[2];
-    reg = null;
-    r = null;
-    return context == null || context == "" || context == "undefined" ? "" : context;
+    let index = url.search(name)
+    return url.slice(index + 11)
   }
 
   export {GetQueryString}

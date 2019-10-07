@@ -16,7 +16,7 @@
       还可享受价值
       <span class="red">899</span>元私人订制睡眠解决方案
     </p>
-    <p class="text">名额有限，领完为止！截至目前已有XX人参与预约</p>
+    <p class="text">名额有限，领完为止！</p>
 
     <newSellInput class="newSellInput" :handleSubmit1="handleSubmit1" :showTips="showTips" />
 
@@ -77,20 +77,20 @@ export default {
       moduleArr: [
         {
           description: "记忆力下降 / 注意力不集中 / 工作效率低",
-          ad: "../../static/img/newSellAd/text4.png",
-          photo: "../../static/img/newSellAd/ad2.png",
+          ad: "./static/img/newSellAd/text4.png",
+          photo: "./static/img/newSellAd/ad2.jpg",
           desWidth: "74.6vw"
         },
         {
           description: "脾气暴躁  /  情绪失控  /  家庭关系恶化",
-          ad: "../../static/img/newSellAd/text5.png",
-          photo: "../../static/img/newSellAd/ad3.png",
+          ad: "./static/img/newSellAd/text5.png",
+          photo: "./static/img/newSellAd/ad3.jpg",
           desWidth: "81.6vw"
         },
         {
           description: "脱发  /  早衰  /  免疫力下降",
-          ad: "../../static/img/newSellAd/text6.png",
-          photo: "../../static/img/newSellAd/ad4.png",
+          ad: "./static/img/newSellAd/text6.png",
+          photo: "./static/img/newSellAd/ad4.jpg",
           desWidth: "74.93vw"
         }
       ],
@@ -144,7 +144,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .newSellAd {
-  background: url("../assets/images/newSellAd/bg.png") no-repeat center;
+  background: url("../assets/images/newSellAd/bg.jpeg") no-repeat center;
   background-size: 100% 100%;
   padding-top: 14.6vw;
   position: relative;
@@ -252,7 +252,7 @@ export default {
   .ad1 {
     width: 67.2vw;
     height: 44.8vw;
-    background: url("../assets/images/newSellAd/ad1.png") no-repeat center;
+    background: url("../assets/images/newSellAd/ad1.jpg") no-repeat center;
     background-size: 100% 100%;
     margin: 0 auto;
     margin-top: 5.73vw;
@@ -301,6 +301,8 @@ export default {
     .photo {
       width: 52.8vw;
       height: 52.8vw;
+      border-radius: 50%;
+
       // background: url("../assets/images/newSellAd/ad2.png") no-repeat center;
       background-size: 100% 100%;
       margin: 0 auto;

@@ -4,14 +4,14 @@
     <div class="logo"></div>
     <div class="banner"></div>
     <!-- <div class="line" :style="{marginTop: marginTop}"></div> -->
-    <div class="from_data"  :style="{marginTop: marginTop}">
+    <div class="from_data" :style="{marginTop: marginTop}">
       <p class="signup"></p>
       <ul>
         <li v-for="(item, index) in text" :key="index" class="input-li">
           <p class="input_left">{{item.left_text}}&nbsp;&nbsp;&nbsp;|</p>
           <inputCmp
             class="input"
-            v-model="list[index]"
+            v-model.trim="list[index]"
             :myType="item.type"
             :placeholderText="item.name"
             :maxLength="item.maxLength"
@@ -79,8 +79,8 @@ export default {
       }
     },
     /**点击预约 */
-    handleSignUp() {
-      this.fixScroll()
+    async handleSignUp() {
+      this.fixScroll();
       const textLen = this.text.length;
       let valLen = 0;
       for (var i = 0; i < textLen; i++) {
@@ -88,6 +88,14 @@ export default {
           this.showTips(this.text[i].name, false);
           return false;
         } else {
+          // if (this.text[i].left_text === "姓名") {
+          //   let passName = await this.recycleName(this.list[i]);
+          //   if (!passName) {
+          //     this.showTips("请输入正确姓名", false);
+          //     return;
+          //   }
+          // }
+          // else 
           if (this.text[i].left_text === "电话") {
             if (!testPhone(this.list[i])) {
               this.showTips("请输入正确号码", false);
@@ -100,6 +108,32 @@ export default {
       if (valLen === textLen) {
         this.handleRequest();
       }
+    },
+    /**循环验证姓氏 */
+    async recycleName(str) {
+      let lastName;
+      let strLen = str.length;
+      let isExist;
+      for (let i = 0; i < strLen; i++) {
+        lastName = str.slice(0, i + 1);
+        isExist = await this.checkName(lastName);
+        if (isExist) {
+          break;
+        }
+      }
+      return isExist;
+    },
+    /**检查姓氏 */
+    async checkName(name) {
+      let isExist;
+      await indexModel.checkLastName(name).then(res => {
+        if (res.data.data) {
+          isExist = true;
+        } else {
+          isExist = false;
+        }
+      });
+      return isExist;
     },
     /**发送请求 */
     handleRequest() {
@@ -116,7 +150,7 @@ export default {
           setTimeout(() => {
             window.location.reload();
           }, 2000);
-        }else {
+        } else {
           this.showTips(res.data.msg, false);
         }
       });
