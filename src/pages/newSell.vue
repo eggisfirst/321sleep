@@ -3,8 +3,8 @@
   <div class="newSell">
     <div class="logo"></div>
     <div class="banner"></div>
-    <div class="line" :style="{marginTop: marginTop}"></div>
-    <div class="from_data">
+    <!-- <div class="line" :style="{marginTop: marginTop}"></div> -->
+    <div class="from_data"  :style="{marginTop: marginTop}">
       <p class="signup"></p>
       <ul>
         <li v-for="(item, index) in text" :key="index" class="input-li">
@@ -70,8 +70,17 @@ export default {
       let phone = this.phoneSize();
       this.marginTop = phone === 800 ? "26.38vh" : "33.39vh";
     },
+    fixScroll() {
+      let u = navigator.userAgent;
+      let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      if (isIOS) {
+        //  this.$refs.input.scrollTop = 500
+        window.scroll(0, 0);
+      }
+    },
     /**点击预约 */
     handleSignUp() {
+      this.fixScroll()
       const textLen = this.text.length;
       let valLen = 0;
       for (var i = 0; i < textLen; i++) {
@@ -134,11 +143,13 @@ export default {
 .newSell {
   width: 100%;
   height: 100%;
-  left: 0;
-  top: 0;
-  position: fixed;
+  // left: 0;
+  // top: 0;
+  // position: fixed;
   background: url("../assets/images/newSell/bg.png") no-repeat center;
   background-size: cover;
+  overflow: scroll;
+  padding-bottom: 20vw;
   // z-index: -1;
   .logo {
     width: 19.46vw;
@@ -167,6 +178,8 @@ export default {
 
   .from_data {
     position: relative;
+    margin-top: 26.38vh;
+
     .signup {
       width: 76.4vw;
       height: 4.13vw;

@@ -1,7 +1,6 @@
 <template>
   <div class="inputComp">
     <input
-      id="input"
       class="input"
       :type="myType"
       :placeholder="placeholderText"
@@ -16,13 +15,20 @@
 
 <script>
 export default {
-  props: ["placeholderText", "myType", "value", "maxLength", 'fontSize'],
+  props: ["placeholderText", "myType", "value", "maxLength", "fontSize"],
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     fixScroll() {
-      // window.scroll(0, 0);
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      let u = navigator.userAgent;
+      let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      if(isIOS) {
+        //  this.$refs.input.scrollTop = 500
+       window.scroll(0, top);
+      }
     },
   }
 };
