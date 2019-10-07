@@ -130,6 +130,7 @@ export default {
       //参数activityId固定
       return GetQueryString("activityId", url);
     },
+    /**弹出提示框 */
     showTips(val) {
       this.isShowTips = true;
       this.tipsText = val.text;

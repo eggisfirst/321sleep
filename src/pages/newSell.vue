@@ -70,11 +70,11 @@ export default {
       let phone = this.phoneSize();
       this.marginTop = phone === 800 ? "26.38vh" : "33.39vh";
     },
+    /**ios点击按钮后回弹页面 */
     fixScroll() {
       let u = navigator.userAgent;
       let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
       if (isIOS) {
-        //  this.$refs.input.scrollTop = 500
         window.scroll(0, 0);
       }
     },

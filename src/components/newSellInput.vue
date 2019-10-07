@@ -45,6 +45,7 @@ export default {
     };
   },
   methods: {
+    /**提交按钮 */
     handleSubmit() {
       const textLen = this.text.length;
       let valLen = 0;

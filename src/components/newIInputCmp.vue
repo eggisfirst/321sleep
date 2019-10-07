@@ -21,6 +21,7 @@ export default {
     };
   },
   methods: {
+    /**ios回弹页面 */
     fixScroll() {
       let top = document.documentElement.scrollTop || document.body.scrollTop;
       let u = navigator.userAgent;
