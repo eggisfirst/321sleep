@@ -8,7 +8,7 @@
       <p class="signup"></p>
       <ul>
         <li v-for="(item, index) in text" :key="index" class="input-li">
-          <span class="input_left">{{item.left_text}} |</span>
+          <p class="input_left">{{item.left_text}}&nbsp;&nbsp;&nbsp;|</p>
           <inputCmp
             class="input"
             v-model="list[index]"
@@ -207,6 +207,7 @@ export default {
       margin-bottom: 2vw;
       display: flex;
       align-items: center;
+      // justify-content: center;
       .input_left {
         font-size: 3.73vw;
         color: #202020;
@@ -216,14 +217,10 @@ export default {
       }
       .input {
         padding-left: 9.46vw;
-        border: 0; // 去除未选中状态边框
-        outline: none; // 去除选中状态边框
-        background-color: rgba(0, 0, 0, 0); // 透明背景
-      }
-      ::-webkit-input-placeholder {
-        color: #7e7e7e;
-        font-size: 3.73vw;
-        line-height: 8.66vw;
+        width: 42vw;
+        // border: 0; // 去除未选中状态边框
+        // outline: none; // 去除选中状态边框
+        // background-color: rgba(0, 0, 0, 0); // 透明背景
       }
     }
     .btn {

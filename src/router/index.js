@@ -47,6 +47,11 @@ export default new Router({
       path: '/newSell',
       name: 'newSell',
       component: () => import('@/pages/newSell')
+    },
+    {
+      path: '/newSellAd',
+      name: 'newSellAd',
+      component: () => import('@/pages/newSellAd')
     }
   ]
 })
