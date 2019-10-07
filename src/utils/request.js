@@ -72,7 +72,7 @@ class Request {
       axios({
         method: 'post',
         // url: this.furao + "/oauth/token",
-        url: this.testUrl + "/oauth/token",
+        url: this.newSellUrl + "/oauth/token",
         params: {
           grant_type: 'client_credentials',
           client_id: '20180813132820',
@@ -96,7 +96,7 @@ class Request {
       axios({
         method: 'post',
         // url: this.furao + "/oauth/token",
-        url: this.testUrl + "/oauth/token",
+        url: this.newSellUrl + "/oauth/token",
         params: {
           grant_type: 'refresh_token',
           refresh_token: localStorage.getItem('token'),

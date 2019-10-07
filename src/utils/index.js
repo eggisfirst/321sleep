@@ -3,9 +3,9 @@ import { getTimestamp } from './rotate'
 class IndexModel extends Request {
   baseUrl = 'https://derucci.net'
   testUrl = 'https://mobiletest.derucci.net/consumer-admin'
+  newSellUrl = 'https://qiang.derucci.com'
 
   test = 'http://10.11.8.164:8080'
-
   furao = 'http://10.11.8.17:8080'
   // 模拟获取抽奖类型
   // getAwardList() {
@@ -104,7 +104,7 @@ class IndexModel extends Request {
   //新零售
   activitySignUp(obj) {
     return this.getPostData({
-      url: this.testUrl + '/v1/api/useraddress/activitySignUp',
+      url: this.newSellUrl + '/v1/api/useraddress/activitySignUp',
       data: obj
     })
   }
@@ -113,7 +113,7 @@ class IndexModel extends Request {
    checkLastName(lastName) {
     return this.getTokenPostData({
       // url: this.furao + '/v2/app/check/lastname',
-      url: this.testUrl + '/v2/app/check/lastname',
+      url: this.newSellUrl + '/v2/app/check/lastname',
       data: {
         lastName
       }
