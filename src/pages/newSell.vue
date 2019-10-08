@@ -88,15 +88,14 @@ export default {
           this.showTips(this.text[i].name, false);
           return false;
         } else {
-          // if (this.text[i].left_text === "姓名") {
-          //   let passName = await this.recycleName(this.list[i]);
-          //   if (!passName) {
-          //     this.showTips("请输入正确姓名", false);
-          //     return;
-          //   }
-          // }
-          // else 
-          if (this.text[i].left_text === "电话") {
+          if (this.text[i].left_text === "姓名") {
+            let passName = await this.recycleName(this.list[i]);
+            if (!passName) {
+              this.showTips("请输入正确姓名", false);
+              return;
+            }
+          }
+          else if (this.text[i].left_text === "电话") {
             if (!testPhone(this.list[i])) {
               this.showTips("请输入正确号码", false);
               return false;
@@ -112,7 +111,7 @@ export default {
     /**循环验证姓氏 */
     async recycleName(str) {
       let lastName;
-      let strLen = str.length;
+      let strLen = str.length - 1;
       let isExist;
       for (let i = 0; i < strLen; i++) {
         lastName = str.slice(0, i + 1);

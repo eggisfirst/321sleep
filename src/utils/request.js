@@ -71,7 +71,7 @@ class Request {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
-        // url: this.furao + "/oauth/token",
+        // url: this.testUrl + "/oauth/token",
         url: this.newSellUrl + "/oauth/token",
         params: {
           grant_type: 'client_credentials',
@@ -95,7 +95,7 @@ class Request {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
-        // url: this.furao + "/oauth/token",
+        // url: this.testUrl + "/oauth/token",
         url: this.newSellUrl + "/oauth/token",
         params: {
           grant_type: 'refresh_token',
