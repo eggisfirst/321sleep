@@ -72,7 +72,6 @@ export default {
       });
       return isExist;
     },
-
     /**提交按钮 */
     async handleSubmit() {
       const textLen = this.text.length;
@@ -86,16 +85,23 @@ export default {
           return false;
         } else {
           if (this.text[i].left_text === "姓名") {
-            let passName = await this.recycleName(this.list[i]);
-            if (!passName) {
+            let testName = /^[\u4e00-\u9fa5]{2,}$/;
+            if (!testName.test(this.list[i])) {
               this.showTips({
-                text: "请输入正确姓名",
+                text: "只能输入中文且不能少于2个字",
                 status: false
               });
               return;
             }
-          } 
-          else if (this.text[i].left_text === "电话") {
+            let passName = await this.recycleName(this.list[i]);
+            if (!passName) {
+              this.showTips({
+                text: "姓氏不存在",
+                status: false
+              });
+              return;
+            }
+          } else if (this.text[i].left_text === "电话") {
             if (!testPhone(this.list[i])) {
               this.showTips({
                 text: "请输入正确号码",

@@ -89,13 +89,18 @@ export default {
           return false;
         } else {
           if (this.text[i].left_text === "姓名") {
-            let passName = await this.recycleName(this.list[i]);
-            if (!passName) {
-              this.showTips("请输入正确姓名", false);
+            let testName = /^[\u4e00-\u9fa5]{2,}$/;
+            if (!testName.test(this.list[i])) {
+              this.showTips("只能输入中文且不能少于2个字", false);
               return;
             }
-          }
-          else if (this.text[i].left_text === "电话") {
+
+            let passName = await this.recycleName(this.list[i]);
+            if (!passName) {
+              this.showTips("姓氏不存在", false);
+              return;
+            }
+          } else if (this.text[i].left_text === "电话") {
             if (!testPhone(this.list[i])) {
               this.showTips("请输入正确号码", false);
               return false;
