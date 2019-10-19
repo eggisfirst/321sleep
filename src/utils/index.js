@@ -108,7 +108,8 @@ class IndexModel extends Request {
   //新零售
   activitySignUp(obj) {
     return this.getPostData({
-      url: this.testUrl2 + '/v1/api/useraddress/activitySignUp',
+      // url: this.testUrl2 + '/v1/api/useraddress/activitySignUp',
+      url: this.signUrl + '/v1/api/useraddress/activitySignUp',
       data: obj
     })
   }
@@ -116,8 +117,8 @@ class IndexModel extends Request {
    //检查姓氏是否存在
    checkLastName(lastName) {
     return this.getTokenPostData({
-      url: this.testUrl + '/v2/app/check/lastname',
-      // url: this.newSellUrl + '/v2/app/check/lastname',
+      // url: this.testUrl + '/v2/app/check/lastname',
+      url: this.newSellUrl + '/v2/app/check/lastname',
       data: {
         lastName
       }

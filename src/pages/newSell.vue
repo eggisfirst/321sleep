@@ -93,11 +93,11 @@ export default {
               return;
             }
 
-            let passName = await this.recycleName(this.list[i]);
-            if (!passName) {
-              this.showTips("姓氏不存在", false);
-              return;
-            }
+            // let passName = await this.recycleName(this.list[i]);
+            // if (!passName) {
+            //   this.showTips("姓氏不存在", false);
+            //   return;
+            // }
           } else if (this.text[i].left_text === "手机号码") {
             if (!testPhone(this.list[i])) {
               this.showTips("请输入正确手机号码", false);

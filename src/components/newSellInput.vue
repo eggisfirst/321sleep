@@ -93,15 +93,15 @@ export default {
               });
               return;
             }
-            let passName = await this.recycleName(this.list[i]);
-            if (!passName) {
-              this.showTips({
-                text: "姓氏不存在",
-                status: false
-              });
-              return;
-            }
-          } else if (this.text[i].left_text === "电话") {
+            // let passName = await this.recycleName(this.list[i]);
+            // if (!passName) {
+            //   this.showTips({
+            //     text: "姓氏不存在",
+            //     status: false
+            //   });
+            //   return;
+            // }
+          } else  if (this.text[i].left_text === "电话") {
             if (!testPhone(this.list[i])) {
               this.showTips({
                 text: "请输入正确号码",
