@@ -1,27 +1,24 @@
 <!--  -->
 <template>
   <div class="newSell">
-    <div class="logo"></div>
-    <div class="banner"></div>
+    <!-- <div class="logo"></div>
+    <div class="banner"></div> -->
     <!-- <div class="line" :style="{marginTop: marginTop}"></div> -->
     <div class="from_data" :style="{marginTop: marginTop}">
-      <p class="signup"></p>
+      <!-- <p class="signup"></p> -->
       <ul>
         <li v-for="(item, index) in text" :key="index" class="input-li">
-          <p class="input_left">{{item.left_text}}&nbsp;&nbsp;&nbsp;|</p>
+          <!-- <p class="input_left">{{item.left_text}}&nbsp;&nbsp;&nbsp;|</p> -->
           <inputCmp
             class="input"
             v-model.trim="list[index]"
             :myType="item.type"
-            :placeholderText="item.name"
+            :placeholderText="item.left_text"
             :maxLength="item.maxLength"
           />
         </li>
       </ul>
-      <div class="btn" @click="handleSignUp">立即预约</div>
-      <p class="promise"></p>
-      <p class="limit"></p>
-      <p class="phoneu"></p>
+      <div class="btn" @click="handleSignUp">点击报名  预约检测</div>
     </div>
 
     <div class="showTips" v-show="isShowTips">
@@ -31,7 +28,7 @@
 </template>
 
 <script>
-import inputCmp from "../components/newIInputCmp";
+import inputCmp from "../components/newInput2";
 import { testPhone, isNull, testUrl, GetQueryString } from "../utils/common";
 import Tips from "../components/tips";
 import { IndexModel } from "../utils/index";
@@ -41,18 +38,19 @@ export default {
   data() {
     return {
       text: [
+         {
+          name: "请输入电话号码",
+          type: "number",
+          maxLength: "11",
+          left_text: "电话"
+        },
         {
-          name: "请输入您的姓名",
+          name: "请输入姓名",
           type: "text",
           maxLength: "20",
           left_text: "姓名"
         },
-        {
-          name: "请输入您的电话",
-          type: "number",
-          maxLength: "11",
-          left_text: "电话"
-        }
+       
       ],
       marginTop: "26.38vh",
       list: [],
@@ -68,7 +66,7 @@ export default {
     /**判断线的位置。如果>800则调整位置 */
     judgeHeight() {
       let phone = this.phoneSize();
-      this.marginTop = phone === 800 ? "26.38vh" : "33.39vh";
+      this.marginTop = phone === 800 ? "65.5vh" : "65.5vh";
     },
     /**ios点击按钮后回弹页面 */
     fixScroll() {
@@ -142,8 +140,8 @@ export default {
     /**发送请求 */
     handleRequest() {
       let obj = {
-        realName: this.list[0],
-        phone: this.list[1],
+        realName: this.list[1],
+        phone: this.list[0],
         url: this.getParams(),
         province: "广东省",
         city: "深圳"
@@ -179,15 +177,15 @@ export default {
 </script>
 <style lang='scss' scoped>
 .newSell {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   // left: 0;
   // top: 0;
   // position: fixed;
-  background: url("../assets/images/newSell/bg.png") no-repeat center;
-  background-size: cover;
+  background: url("../assets/images/newSell/newbg.png") no-repeat center;
+  background-size: 100% 100%;
   overflow: scroll;
-  padding-bottom: 20vw;
+  padding-bottom: 2vw;
   // z-index: -1;
   .logo {
     width: 19.46vw;
@@ -217,7 +215,6 @@ export default {
   .from_data {
     position: relative;
     margin-top: 26.38vh;
-
     .signup {
       width: 76.4vw;
       height: 4.13vw;
@@ -251,9 +248,10 @@ export default {
 
     .input-li {
       margin: 0 auto;
-      width: 73.6vw;
-      height: 8.66vw;
-      background: url("../assets/images/newSell/input.png") no-repeat center;
+      width: 87.2vw;
+      height: 12.26vw;
+      background-color: #f3f3f3;
+      // background: url("../assets/images/newSell/input.png") no-repeat center;
       background-size: 100% 100%;
       margin-bottom: 2vw;
       display: flex;
@@ -262,7 +260,7 @@ export default {
       .input_left {
         font-size: 3.73vw;
         color: #202020;
-        line-height: 8.66vw;
+        line-height: 12.26vw;
         padding-left: 5.86vw;
         font-weight: 500;
       }
@@ -276,16 +274,17 @@ export default {
     }
     .btn {
       margin: 0 auto;
-      width: 74.53vw;
-      height: 8vw;
-      background: url("../assets/images/newSell/btn.png") no-repeat center;
-      background-size: 100% 100%;
+      width: 87.2vw;
+      height: 10.4vw;
+      // background: url("../assets/images/newSell/btn.png") no-repeat center;
+      // background-size: 100% 100%;
       margin-bottom: 2vw;
       text-align: center;
-      line-height: 8vw;
-      font-size: 3.2vw;
-      color: #202020;
-      font-weight: 500;
+      line-height: 10.4vw;
+      font-size: 4.6vw;
+      color: #fff;
+      // font-weight: 500;
+      background-color:#2F8EEC;
     }
   }
   .showTips {

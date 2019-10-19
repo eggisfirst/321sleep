@@ -116,8 +116,8 @@ class IndexModel extends Request {
    //检查姓氏是否存在
    checkLastName(lastName) {
     return this.getTokenPostData({
-      // url: this.testUrl + '/v2/app/check/lastname',
-      url: this.newSellUrl + '/v2/app/check/lastname',
+      url: this.testUrl + '/v2/app/check/lastname',
+      // url: this.newSellUrl + '/v2/app/check/lastname',
       data: {
         lastName
       }

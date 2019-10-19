@@ -71,8 +71,8 @@ class Request {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
-        // url: this.testUrl + "/oauth/token",
-        url: this.newSellUrl + "/oauth/token",
+        url: this.testUrl + "/oauth/token",
+        // url: this.newSellUrl + "/oauth/token",
         params: {
           grant_type: 'client_credentials',
           client_id: '20180813132820',
@@ -95,8 +95,8 @@ class Request {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
-        // url: this.testUrl + "/oauth/token",
-        url: this.newSellUrl + "/oauth/token",
+        url: this.testUrl + "/oauth/token",
+        // url: this.newSellUrl + "/oauth/token",
         params: {
           grant_type: 'refresh_token',
           refresh_token: localStorage.getItem('token'),
