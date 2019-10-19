@@ -39,10 +39,10 @@ export default {
     return {
       text: [
          {
-          name: "请输入电话号码",
+          name: "请输入手机号码",
           type: "number",
           maxLength: "11",
-          left_text: "电话"
+          left_text: "手机号码"
         },
         {
           name: "请输入姓名",
@@ -98,9 +98,9 @@ export default {
               this.showTips("姓氏不存在", false);
               return;
             }
-          } else if (this.text[i].left_text === "电话") {
+          } else if (this.text[i].left_text === "手机号码") {
             if (!testPhone(this.list[i])) {
-              this.showTips("请输入正确号码", false);
+              this.showTips("请输入正确手机号码", false);
               return false;
             }
           }

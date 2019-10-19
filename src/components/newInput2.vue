@@ -49,6 +49,6 @@ export default {
 }
 .input::-webkit-input-placeholder {
   color: #d4d3d3;
-  line-height: 8.66vw;
+  // line-height: 8.66vw;
 }
 </style>
