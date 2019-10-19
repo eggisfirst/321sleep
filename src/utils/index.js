@@ -5,7 +5,7 @@ class IndexModel extends Request {
   testUrl = 'https://mobiletest.derucci.net/cd-sys-web' //营销助手接口的测试区
   testUrl2 = 'https://mobiletest.derucci.net/consumer-admin' //新零售报名的测试区
   // newSellUrl = 'https://qiang.derucci.com'
-  newSellUrl = 'https://agency.derucci.com/'  //姓名检测的正式区
+  newSellUrl = 'https://agency.derucci.com'  //姓名检测的正式区
   signUrl = 'https://qiang.derucci.com'  //新零售报名的正式区
 
 
@@ -116,8 +116,8 @@ class IndexModel extends Request {
    //检查姓氏是否存在
    checkLastName(lastName) {
     return this.getTokenPostData({
-      url: this.testUrl + '/v2/app/check/lastname',
-      // url: this.newSellUrl + '/v2/app/check/lastname',
+      // url: this.testUrl + '/v2/app/check/lastname',
+      url: this.newSellUrl + '/v2/app/check/lastname',
       data: {
         lastName
       }
