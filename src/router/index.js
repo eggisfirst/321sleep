@@ -19,7 +19,7 @@ export default new Router({
     },
     // 321大转盘活动
     {
-      path: '/',
+      path: '/rotating',  //部署的时候换成跟路径
       name: 'rotating',
       component: resolve => require(['@/pages/rotating'], resolve)
     },
@@ -44,7 +44,7 @@ export default new Router({
       component: resolve => require(['@/pages/H5pay'], resolve)
     },
     {
-      path: '/newSell',
+      path: '/',
       name: 'newSell',
       component: () => import('@/pages/newSell')
     },

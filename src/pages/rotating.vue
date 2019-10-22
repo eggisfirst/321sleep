@@ -76,7 +76,8 @@ export default {
       let url = location.href
       //重定向
       if(url.indexOf('code') == -1){
-        location.href = 'https://derucci.net/web/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
+        // location.href = 'https://derucci.net/web/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
+        location.href = 'https://derucci.net/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
       }
       let code = getQueryString('code')
       this.getUnionId(code)

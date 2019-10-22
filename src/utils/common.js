@@ -1,4 +1,5 @@
 import axios from 'axios' 
+import sha1  from 'js-sha1'
 export default class Common {
   // 参数加密
   getSign(arr) {
@@ -33,7 +34,6 @@ export default class Common {
     })
   }
  }
-
 
   // 校验手机格式
   let testPhone = (phone) =>  {

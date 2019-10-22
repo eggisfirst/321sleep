@@ -108,8 +108,9 @@ class IndexModel extends Request {
   //新零售
   activitySignUp(obj) {
     return this.getPostData({
+      url: this.test + '/v1/api/useraddress/activitySignUp',
       // url: this.testUrl2 + '/v1/api/useraddress/activitySignUp',
-      url: this.signUrl + '/v1/api/useraddress/activitySignUp',
+      // url: this.signUrl + '/v1/api/useraddress/activitySignUp',
       data: obj
     })
   }
@@ -124,6 +125,7 @@ class IndexModel extends Request {
       }
     })
   }
+
 }
 
 export { IndexModel }

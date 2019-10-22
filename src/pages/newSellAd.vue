@@ -111,8 +111,8 @@ export default {
         realName: list[0],
         phone: list[1],
         url: this.getParams(),
-        province: "广东省",
-        city: "深圳"
+        u_province: "广东省",
+        u_city: "深圳"
       };
       indexModel.activitySignUp(obj).then(res => {
         if (res.data.status) {

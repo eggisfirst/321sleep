@@ -2,7 +2,7 @@
 <template>
   <div class="newSell">
     <!-- <div class="logo"></div>
-    <div class="banner"></div> -->
+    <div class="banner"></div>-->
     <!-- <div class="line" :style="{marginTop: marginTop}"></div> -->
     <div class="from_data" :style="{marginTop: marginTop}">
       <!-- <p class="signup"></p> -->
@@ -18,7 +18,7 @@
           />
         </li>
       </ul>
-      <div class="btn" @click="handleSignUp">点击报名  预约检测</div>
+      <div class="btn" @click="handleSignUp">点击报名 预约检测</div>
     </div>
 
     <div class="showTips" v-show="isShowTips">
@@ -33,12 +33,14 @@ import { testPhone, isNull, testUrl, GetQueryString } from "../utils/common";
 import Tips from "../components/tips";
 import { IndexModel } from "../utils/index";
 const indexModel = new IndexModel();
+
+import { getQueryString } from '../utils/rotate'
 export default {
   components: { inputCmp, Tips },
   data() {
     return {
       text: [
-         {
+        {
           name: "请输入手机号码",
           type: "number",
           maxLength: "11",
@@ -49,20 +51,43 @@ export default {
           type: "text",
           maxLength: "20",
           left_text: "姓名"
-        },
-       
+        }
       ],
       marginTop: "26.38vh",
       list: [],
       isShowTips: false,
       tipsText: "",
-      tipsPic: false
+      tipsPic: false,
+      userData: {}
     };
   },
   created() {
     this.judgeHeight();
+    this.getCode()
   },
   methods: {
+     getCode() {
+      let url = location.href
+      //重定向
+      if(url.indexOf('code') == -1){
+        location.href = 'https://derucci.net/service/get-weixin-code.html?appid=wx877a7e37b0de0a87&scope=snsapi_base&state=parsm&redirect_uri='+url; 
+      }
+      let code = getQueryString('code')
+      console.log('code',code)
+      this.getUnionId(code)
+    },
+    //获取unionId/头像/昵称
+    getUnionId(code) {
+      indexModel.getUnionId(code).then(res => {
+        if(res.code == 0) {
+          if(res.unionid) {
+            this.userData = res
+          } 
+        }else{
+          alert('已过期，请重新登录')
+        }
+      })
+    },
     /**判断线的位置。如果>800则调整位置 */
     judgeHeight() {
       let phone = this.phoneSize();
@@ -143,9 +168,11 @@ export default {
         realName: this.list[1],
         phone: this.list[0],
         url: this.getParams(),
-        province: "广东省",
-        city: "深圳"
+        u_province: "广东省",
+        u_city: "深圳",
+        ...this.userData
       };
+      console.log('obj',obj)
       indexModel.activitySignUp(obj).then(res => {
         if (res.data.status) {
           this.showTips("预约成功", true);
@@ -284,7 +311,7 @@ export default {
       font-size: 4.6vw;
       color: #fff;
       // font-weight: 500;
-      background-color:#2F8EEC;
+      background-color: #2f8eec;
     }
   }
   .showTips {
